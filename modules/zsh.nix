@@ -37,7 +37,7 @@
       export GPG_TTY="$(tty)"; # put this here and not in sessionVariables to ensure it gets reexecuted for all interactive shells
     '';
 
-    initExtra = builtins.readFile ./files/zshrc;
+    initExtra = builtins.readFile ../files/zshrc;
 
     # TODO(jawa) review completion
 

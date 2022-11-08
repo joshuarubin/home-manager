@@ -28,10 +28,21 @@
       inherit pkgs;
 
       modules = [
-        ./home.nix
-        ./zsh.nix
-        ./git.nix
+        ./modules/files.nix
+        ./modules/git.nix
+        ./modules/home.nix
+        ./modules/packages.nix
+        ./modules/programs.nix
+        ./modules/zsh.nix
       ];
+
+      extraSpecialArgs = {
+        sysConfig = {
+          username = "jrubin";
+          homeDirectory = "/home/jrubin";
+          stateVersion = "22.05";
+        };
+      };
 
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
