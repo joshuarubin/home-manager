@@ -15,14 +15,8 @@
     home-manager,
     ...
   }: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfreePredicate = pkg:
-        builtins.elem (nixpkgs.lib.getName pkg) [
-          "oraclejdk"
-        ];
-    };
+    system = "x86_64-linux"; # TODO(jawa)
+    pkgs = import nixpkgs {inherit system;};
   in {
     homeConfigurations.jrubin = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -43,9 +37,6 @@
           stateVersion = "22.05";
         };
       };
-
-      # Optionally use extraSpecialArgs
-      # to pass through arguments to home.nix
     };
   };
 }

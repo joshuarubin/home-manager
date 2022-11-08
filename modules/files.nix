@@ -7,4 +7,6 @@ _: {
   };
 
   home.file.".actrc".source = ../files/actrc;
+
+  home.file.".ignore".source = ../files/ignore;
 }

@@ -25,6 +25,7 @@ in {
     gcc
     grc
     htop
+    jdk
     julia-bin
     less
     lesspipe
@@ -34,7 +35,6 @@ in {
     nodePackages.eslint
     nodePackages.prettier
     nodejs-16_x
-    oraclejdk
     pass
     php
     php81Packages.composer
