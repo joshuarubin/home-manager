@@ -110,6 +110,7 @@
     gwd = "git diff"; # TODO(jawa) --no-ext-diff
     gws = "git status";
     history = "noglob history";
+    ip = "ip --color=auto";
     listeners = "sudo lsof -nPiTCP -sTCP:LISTEN";
     ln = "nocorrect ln -i";
     locate = "noglob locate";

@@ -22,11 +22,15 @@ in {
     du-dust
     duf
     exa
+    fuse-overlayfs
     gcc
     grc
     htop
     jdk
+    jq
     julia-bin
+    k3s
+    kubectl
     less
     lesspipe
     lua
@@ -48,6 +52,7 @@ in {
     safe-rm
     shellcheck
     shfmt
+    slirp4netns
     sqlfluff
     statix
     stylua

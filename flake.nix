@@ -27,6 +27,7 @@
         ./modules/home.nix
         ./modules/packages.nix
         ./modules/programs.nix
+        ./modules/systemd.nix
         ./modules/zsh.nix
       ];
 

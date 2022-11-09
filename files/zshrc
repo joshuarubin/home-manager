@@ -91,6 +91,8 @@ add-zsh-hook precmd prompt_lean_precmd_patch
 
 . $HOME/.nix-profile/etc/grc.zsh
 
+unset -f ip
+
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 ls () {
