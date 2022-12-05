@@ -111,7 +111,7 @@
     gws = "git status";
     history = "noglob history";
     ip = "ip --color=auto";
-    listeners = "sudo lsof -nPiTCP -sTCP:LISTEN";
+    listeners = "sudo lsof -nPiTCP -sTCP:LISTEN +c0";
     ln = "nocorrect ln -i";
     locate = "noglob locate";
     make = "colormake";

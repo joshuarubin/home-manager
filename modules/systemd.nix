@@ -19,7 +19,7 @@
             --snapshotter=fuse-overlayfs \
             --write-kubeconfig="''${HOME}/.config/k3s/kubeconfig.yaml" \
             --data-dir="''${HOME}/.local/share/k3s" \
-            --write-kubeconfig-mode =644 \
+            --write-kubeconfig-mode=644 \
             --cluster-cidr="172.20.0.0/16" \
             --service-cidr="172.21.0.0/16" \
             --node-external-ip="$(ip -j -f inet addr show scope global up | jq -r \'map(select(.operstate == "UP"))[0].addr_info[0].local\')" \

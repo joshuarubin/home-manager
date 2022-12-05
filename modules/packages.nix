@@ -12,6 +12,7 @@ in {
     cargo
     chezmoi
     clippy
+    cmake
     colordiff
     colormake
     curl
@@ -21,9 +22,11 @@ in {
     dig
     du-dust
     duf
+    eternal-terminal
     exa
     fuse-overlayfs
     gcc
+    gnumake
     grc
     htop
     jdk
