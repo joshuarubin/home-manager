@@ -16,7 +16,12 @@
     ...
   }: let
     system = "x86_64-linux"; # TODO(jawa)
-    pkgs = import nixpkgs {inherit system;};
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [
+        (import ./overlays/local.nix)
+      ];
+    };
   in {
     homeConfigurations.jrubin = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;

@@ -1,14 +1,10 @@
-{pkgs, ...}: let
-  bufNoCheck = pkgs.buf.overrideAttrs (_oldAttrs: rec {
-    doCheck = false;
-  });
-in {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     act
     alejandra
     aria
     bat
-    bufNoCheck
+    buf
     cargo
     chezmoi
     clippy
@@ -29,6 +25,7 @@ in {
     gnumake
     grc
     htop
+    infra
     jdk
     jq
     julia-bin
