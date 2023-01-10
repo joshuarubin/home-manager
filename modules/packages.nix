@@ -60,6 +60,7 @@
     tree-sitter
     unzip
     vale
+    vault
     wget
     zsh-completions
   ];
