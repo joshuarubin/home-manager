@@ -57,6 +57,7 @@
     statix
     stylua
     terraform
+    tmate
     tree-sitter
     unzip
     vale

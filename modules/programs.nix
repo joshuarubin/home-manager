@@ -2,6 +2,12 @@ _: {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.readline = {
+    enable = true;
+    includeSystemConfig = false;
+    extraConfig = "set editing-mode vi";
+  };
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -32,6 +38,7 @@ _: {
 
   programs.direnv = {
     enable = true;
+    nix-direnv.enable = true;
     enableZshIntegration = true;
   };
 
