@@ -11,17 +11,20 @@
     cmake
     colordiff
     colormake
+    cpplint
     curl
     deadnix
     delta
     difftastic
     dig
+    direnv
     du-dust
     duf
     eternal-terminal
     exa
     fuse-overlayfs
     gcc
+    git
     gnumake
     grc
     htop
@@ -31,11 +34,13 @@
     julia-bin
     k3s
     kubectl
+    kubernetes-helm
     less
     lesspipe
     lua
     luajitPackages.luarocks
     luajitPackages.tl
+    neovim-remote
     nodePackages.eslint
     nodePackages.prettier
     nodejs-16_x
