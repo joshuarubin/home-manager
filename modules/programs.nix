@@ -44,6 +44,6 @@ _: {
 
   programs.go = {
     enable = true;
-    goPrivate = ["github.com/groq-psw"];
+    goPrivate = ["github.com/groq-psw" "git.groq.io"];
   };
 }
