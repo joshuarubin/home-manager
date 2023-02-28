@@ -1,9 +1,10 @@
-vendor/
-node_modules/
-bower_components/
 *.bak
 *.swp
 *~
-.git/
+.git*
 .mypy_cache/
+.project
 .zfs/
+bower_components/
+node_modules/
+vendor/

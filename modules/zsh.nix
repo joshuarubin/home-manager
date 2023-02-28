@@ -27,8 +27,6 @@
 
     historySubstringSearch = {
       enable = true;
-      searchDownKey = "^[OB";
-      searchUpKey = "^[OA";
     };
 
     initExtraFirst = ''
@@ -98,7 +96,7 @@
     gf = "git fetch";
     gfm = "git pull --no-rebase";
     gia = "git add";
-    gl = "git log --topo-order --prety=fuller";
+    gl = "git log --topo-order --pretty=fuller";
     glg = "git log --graph --pretty=oneline";
     glo = "git log --topo-order --pretty=oneline";
     gm = "git merge";

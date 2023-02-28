@@ -142,6 +142,7 @@
       ".mypy_cache/"
       ".netrwhist"
       ".notags"
+      ".project"
       ".stignore"
       ".stversions/"
       ".svn/"
