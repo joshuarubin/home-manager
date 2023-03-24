@@ -9,4 +9,9 @@ _: {
   home.file.".actrc".source = ../files/actrc;
 
   home.file.".ignore".source = ../files/ignore;
+
+  home.file.".terminfo.wezterm" = {
+    source = ../files/wezterm.terminfo;
+    onChange = "tic -x -o ~/.terminfo ~/.terminfo.wezterm";
+  };
 }
