@@ -73,6 +73,7 @@
     unzip
     vale
     vault
+    wezterm
     wget
     zsh-completions
   ];
