@@ -85,7 +85,7 @@
       };
 
       credential = {
-        helper = "/usr/local/share/gcm-core/git-credential-manager-core";
+        helper = "/usr/local/bin/git-credential-manager";
       };
 
       commit = {
