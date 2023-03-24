@@ -26,9 +26,11 @@
     gcc
     git
     gnumake
+    go
     gofumpt
     golangci-lint
     golint
+    gopls
     gotools
     grc
     htop

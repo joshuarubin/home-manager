@@ -61,6 +61,7 @@
     # MAKEFLAGS = "-j <numcpu>"; # TODO(jawa)
     # SSH_AUTH_SOCK = ""; # TODO(jawa)
     EDITOR = "nvim";
+    GOPRIVATE = "github.com/groq-psw,git.groq.io";
     GREP_COLOR = "1;33";
     GREP_COLORS = "mt=\${GREP_COLOR}";
     LESS = "-F -g -i -M -R -X";

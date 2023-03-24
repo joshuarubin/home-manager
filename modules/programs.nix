@@ -41,9 +41,4 @@ _: {
     nix-direnv.enable = true;
     enableZshIntegration = true;
   };
-
-  programs.go = {
-    enable = true;
-    goPrivate = ["github.com/groq-psw" "git.groq.io"];
-  };
 }

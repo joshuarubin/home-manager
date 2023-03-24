@@ -194,6 +194,19 @@
           };
         };
       }
+      {
+        condition = "hasconfig:remote.*.url:git@git.groq.io:*/**";
+        contents = {
+          user = {
+            email = "jrubin@groq.com";
+          };
+
+          credential = {
+            username = "jrubin_groq";
+            credentialStore = "gpg"; # TODO(jawa) this depends on os
+          };
+        };
+      }
     ];
 
     lfs.enable = true;
