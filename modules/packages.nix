@@ -41,6 +41,7 @@
     k3s
     kubectl
     kubernetes-helm
+    lazygit
     less
     lesspipe
     lua

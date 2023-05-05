@@ -5,31 +5,36 @@ path=(
 
 setopt ALWAYS_TO_END          # Move cursor to the end of a completed word
 setopt AUTO_CD
+setopt AUTO_PARAM_SLASH       # If completed parameter is a directory, add a trailing slash.
 setopt AUTO_PUSHD             # Push the current directory visited on the stack
 setopt AUTO_RESUME            # Attempt to resume existing job before creating a new process
+setopt CHECK_JOBS             # Report the status of background and suspended jobs before exiting a shell with job control.
 setopt COMBINING_CHARS        # Combine zero-length punctuation characters (accents) with the base character
 setopt COMPLETE_IN_WORD       # Complete from both ends of a word
 setopt CORRECT
 setopt EXTENDED_GLOB          # Needed for file modification glob modifiers with compinit
 setopt EXTENDED_HISTORY       # Write the history file in the ':start:elapsed;command' format
+setopt HIST_BEEP              # Beep when accessing non-existent history.
 setopt HIST_EXPIRE_DUPS_FIRST # Expire a duplicate event first when trimming history
 setopt HIST_IGNORE_ALL_DUPS   # Delete an old recorded event if a new event is a duplicate
 setopt HIST_REDUCE_BLANKS
 setopt HIST_SAVE_NO_DUPS      # Do not write a duplicate event to the history file
 setopt INTERACTIVE_COMMENTS
+setopt LIST_PACKED            # The completion menu takes less space
+setopt LIST_ROWS_FIRST        # Matches are sorted in rows instead of columns
 setopt LONG_LIST_JOBS         # List jobs in the long format by default
 setopt PATH_DIRS              # Perform path search even on command names with slashes
 setopt PUSHD_IGNORE_DUPS      # Do not store duplicates in the stack
 setopt PUSHD_SILENT           # Do not print the directory stack after pushd or
-setopt PUSHD_TO_HOME
+setopt PUSHD_TO_HOME          # Have pushd with no arguments act like `pushd $HOME'.
 setopt RC_QUOTES              # Allow two single quotes to signify a single quote within singly quoted strings
 setopt SHARE_HISTORY          # Share history between all sessions
 
 unsetopt BG_NICE      # Don't run all background jobs at a lower priority
-unsetopt CASE_GLOB
+unsetopt CASE_GLOB    # Make globbing (filename generation) not sensitive to case.
 unsetopt CLOBBER
 unsetopt FLOW_CONTROL # Disable start/stop characters in shell editor
-unsetopt LIST_BEEP
+unsetopt LIST_BEEP    # Don't beep on an ambiguous completion.
 unsetopt NOMATCH
 
 autoload -Uz edit-command-line && zle -N edit-command-line
@@ -44,7 +49,9 @@ bindkey          "^[."     insert-last-word  # meta-.
 bindkey          "^[OC"    forward-char      # Right
 bindkey          "^[OD"    backward-char     # Left
 bindkey          "^[OF"    end-of-line       # End
+bindkey          '^[[F'    end-of-line       # End (Mac)
 bindkey          "^[OH"    beginning-of-line # Home
+bindkey          '^[[H'    beginning-of-line # Home (Mac)
 bindkey          "^[[3~"   delete-char
 bindkey          "^[[5~"   up-line-or-history    # PageUp
 bindkey          "^[[6~"   down-line-or-history  # PageDown
@@ -75,6 +82,50 @@ bindkey -M viins '^[f'     forward-word  # meta-f
 
 bindkey -r "^T" # remove default fzf-file-widget bind
 
+# case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' '+r:|?=**'
+
+# make completion more verbose
+zstyle ':completion:*' verbose yes
+
+# Fuzzy match mistyped completions.
+zstyle ':completion:*' completer _complete _match _approximate
+
+# enable caching
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path "$HOME/.local/share/zcompcache"
+
+# completion menu
+zstyle ':completion:*:*:*:*:*' menu select
+
+# colorize the description of the completion type
+zstyle ':completion:*:descriptions' format '%F{green}-- %d --%f'
+
+# colorize a few other output types
+zstyle ':completion:*:messages' format '%F{purple}-- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}-- no matches found --%f'
+
+# group matches under their descriptions
+zstyle ':completion:*' group-name ''
+
+# colorize files and directories in completion lists
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# turn // into / instead of /*/
+zstyle ':completion:*' squeeze-slashes true
+
+# for commands like cd, - can be completed to dir stack, also show options
+zstyle ':completion:*' complete-options true
+
+# show man pages in menu by section
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.(^1*)' insert-sections true
+
+# nicer looking kill completion
+zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
+
+prompt_lean_host=" %F{"$COLOR3"}%m%f"
+
 prompt_lean_precmd_patch () {
   # use λ instead of % for prompt
   PROMPT="${PROMPT:s/%#/%(\!.#.λ)/}"
@@ -88,6 +139,26 @@ zle-keymap-select () {
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd prompt_lean_precmd_patch
+
+# -P     Perform prompt expansion
+# -r     Ignore the escape conventions of echo
+# -n     Do not add a newline to the output
+# \e     escape sequence for escape (ESC)
+# \a     escape sequence for bell (BEL)
+# %~     Current working directory
+
+jawa_precmd () {
+  print -Pn "\e]0;%~\a"
+}
+
+jawa_preexec () {
+  print -Pn "\e]0;"
+  print -rn "$1"
+  print -Pn "\a"
+}
+
+add-zsh-hook precmd jawa_precmd
+add-zsh-hook preexec jawa_preexec
 
 . $HOME/.nix-profile/etc/grc.zsh
 

@@ -47,6 +47,7 @@
       HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND = "bg=red,bold";
       KEYTIMEOUT = "1";
       PROMPT_LEAN_VIMODE = "1";
+      PROMPT_LEAN_NOTITLE = "1";
       WORDCHARS = "*?_-.[]~&;!#$%^(){}<>"; # remove =/ from the list
     };
 
@@ -66,6 +67,7 @@
     GREP_COLORS = "mt=\${GREP_COLOR}";
     LESS = "-F -g -i -M -R -X";
     LESSOPEN = "| lesspipe.sh %s";
+    LS_COLORS = "di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:";
     PAGER = "less";
     RIPGREP_CONFIG_PATH = "$HOME/.ripgreprc";
     USE_GKE_GCLOUD_AUTH_PLUGIN = "True";
