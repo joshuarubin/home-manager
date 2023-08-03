@@ -15,6 +15,8 @@
     curl
     deadnix
     delta
+    deno
+    devbox
     difftastic
     dig
     direnv
@@ -38,7 +40,6 @@
     jdk
     jq
     julia-bin
-    k3s
     kubectl
     kubernetes-helm
     lazygit
@@ -50,12 +51,11 @@
     neovim-remote
     nodePackages.eslint
     nodePackages.prettier
-    nodejs-16_x
+    nodejs-18_x
     pass
     php
     php81Packages.composer
     pre-commit
-    python310Full
     ran
     ripgrep
     rust-analyzer

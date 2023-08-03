@@ -5,7 +5,9 @@
     cdpath = ["." "$HOME" "$HOME/dev"];
     enableAutosuggestions = true;
     enableCompletion = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting = {
+      enable = true;
+    };
     defaultKeymap = "viins";
 
     plugins = [
@@ -30,7 +32,6 @@
     };
 
     initExtraFirst = ''
-      . $HOME/.nix-profile/etc/profile.d/nix.sh
       export NIX_PATH=$HOME/.nix-defexpr/channels
       export GPG_TTY="$(tty)"; # put this here and not in sessionVariables to ensure it gets reexecuted for all interactive shells
     '';
@@ -122,6 +123,7 @@
     rm = "nocorrect safe-rm";
     rsync = "noglob rsync";
     top = "htop";
+    tree = "ls --tree";
     v = "ls -l";
   };
 }

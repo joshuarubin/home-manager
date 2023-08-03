@@ -21,6 +21,10 @@
       overlays = [
         (import ./overlays/local.nix)
       ];
+      config.allowUnfreePredicate = pkg:
+        builtins.elem (pkgs.lib.getName pkg) [
+          "infra"
+        ];
     };
   in {
     homeConfigurations.jrubin = home-manager.lib.homeManagerConfiguration {
