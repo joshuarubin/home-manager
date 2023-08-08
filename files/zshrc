@@ -126,9 +126,15 @@ zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,comma
 
 prompt_lean_host=" %F{"$COLOR3"}%m%f"
 
+show_virtual_env() {
+  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+    echo "($(basename $VIRTUAL_ENV)) "
+  fi
+}
+
 prompt_lean_precmd_patch () {
   # use λ instead of % for prompt
-  PROMPT="${PROMPT:s/%#/%(\!.#.λ)/}"
+  PROMPT="$(show_virtual_env)${PROMPT:s/%#/%(\!.#.λ)/}"
 }
 
 zle-keymap-select () {
