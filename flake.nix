@@ -45,7 +45,7 @@
         sysConfig = {
           username = "jrubin";
           homeDirectory = "/home/jrubin";
-          stateVersion = "22.05";
+          stateVersion = "23.05";
         };
       };
     };

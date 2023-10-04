@@ -93,6 +93,7 @@
     g = "git";
     gbr = "git branch";
     gc = "git commit --signoff --verbose";
+    gcam = "git commit --signoff --verbose --all --message";
     gcc = "nocorrect gcc";
     gcm = "git commit --signoff --message";
     gco = "git checkout";
@@ -113,6 +114,7 @@
     gws = "git status";
     history = "noglob history";
     ip = "ip --color=auto";
+    k = "kubectl";
     listeners = "sudo lsof -nPiTCP -sTCP:LISTEN +c0";
     ln = "nocorrect ln -i";
     locate = "noglob locate";

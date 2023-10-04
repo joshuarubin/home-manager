@@ -23,7 +23,7 @@
     du-dust
     duf
     eternal-terminal
-    exa
+    eza
     fuse-overlayfs
     gcc
     git
@@ -40,6 +40,7 @@
     jdk
     jq
     julia-bin
+    k3s
     kubectl
     kubernetes-helm
     lazygit

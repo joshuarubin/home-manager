@@ -181,7 +181,7 @@ ls () {
   else
     args=($args $@)
   fi
-  exa ${args}
+  eza ${args}
 }
 
 env () {
