@@ -23,7 +23,6 @@ setopt INTERACTIVE_COMMENTS
 setopt LIST_PACKED            # The completion menu takes less space
 setopt LIST_ROWS_FIRST        # Matches are sorted in rows instead of columns
 setopt LONG_LIST_JOBS         # List jobs in the long format by default
-setopt PATH_DIRS              # Perform path search even on command names with slashes
 setopt PUSHD_IGNORE_DUPS      # Do not store duplicates in the stack
 setopt PUSHD_SILENT           # Do not print the directory stack after pushd or
 setopt PUSHD_TO_HOME          # Have pushd with no arguments act like `pushd $HOME'.

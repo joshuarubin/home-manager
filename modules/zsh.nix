@@ -2,8 +2,10 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    cdpath = ["." "$HOME" "$HOME/dev"];
-    enableAutosuggestions = true;
+    cdpath = ["." "$HOME" "$HOME/dev/cloud" "$HOME/dev"];
+    autosuggestion = {
+      enable = true;
+    };
     enableCompletion = true;
     syntaxHighlighting = {
       enable = true;
@@ -47,9 +49,11 @@
       HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND = "fg=yellow,bold";
       HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND = "bg=red,bold";
       KEYTIMEOUT = "1";
-      PROMPT_LEAN_VIMODE = "1";
       PROMPT_LEAN_NOTITLE = "1";
+      PROMPT_LEAN_VCS = 0;
+      PROMPT_LEAN_VIMODE = "1";
       WORDCHARS = "*?_-.[]~&;!#$%^(){}<>"; # remove =/ from the list
+      ZSH_AUTOSUGGEST_MANUAL_REBIND = 1;
     };
 
     # envExtra = "";

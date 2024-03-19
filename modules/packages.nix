@@ -16,7 +16,7 @@
     deadnix
     delta
     deno
-    devbox
+    # devbox
     difftastic
     dig
     direnv
@@ -30,18 +30,18 @@
     gnumake
     go
     gofumpt
-    golangci-lint
+    # golangci-lint
     golint
     gopls
     gotools
     grc
     htop
-    infra
+    # infra
     jdk
     jq
     julia-bin
     k3s
-    kubectl
+    # kubectl
     kubernetes-helm
     lazygit
     less

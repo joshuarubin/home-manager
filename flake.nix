@@ -24,6 +24,8 @@
       config.allowUnfreePredicate = pkg:
         builtins.elem (pkgs.lib.getName pkg) [
           "infra"
+          "terraform"
+          "vault"
         ];
     };
   in {

@@ -195,6 +195,19 @@
         };
       }
       {
+        condition = "hasconfig:remote.*.url:https://github.com/groq/**";
+        contents = {
+          user = {
+            email = "jrubin@groq.com";
+          };
+
+          credential = {
+            username = "joshuarubin";
+            credentialStore = "gpg"; # TODO(jawa) this depends on os
+          };
+        };
+      }
+      {
         condition = "hasconfig:remote.*.url:git@git.groq.io:*/**";
         contents = {
           user = {

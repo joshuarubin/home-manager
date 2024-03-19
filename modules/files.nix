@@ -14,4 +14,6 @@ _: {
     source = ../files/wezterm.terminfo;
     onChange = "tic -x -o ~/.terminfo ~/.terminfo.wezterm";
   };
+
+  home.file.".gnupg/gpg-agent.conf".source = ../files/gnupg/gpg-agent.conf;
 }
