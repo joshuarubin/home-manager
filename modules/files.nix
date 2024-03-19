@@ -16,4 +16,6 @@ _: {
   };
 
   home.file.".gnupg/gpg-agent.conf".source = ../files/gnupg/gpg-agent.conf;
+
+  home.file.".zsh/functions".source = ../files/zsh/functions;
 }

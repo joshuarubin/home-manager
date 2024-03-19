@@ -36,6 +36,12 @@
     initExtraFirst = ''
       export NIX_PATH=$HOME/.nix-defexpr/channels
       export GPG_TTY="$(tty)"; # put this here and not in sessionVariables to ensure it gets reexecuted for all interactive shells
+      export FPATH
+
+      fpath=(
+        "$HOME/.zsh/functions"
+        $fpath
+      )
     '';
 
     initExtra = builtins.readFile ../files/zshrc;
@@ -128,6 +134,7 @@
     mv = "nocorrect mv -i";
     rm = "nocorrect safe-rm";
     rsync = "noglob rsync";
+    tf = "terraform";
     top = "htop";
     tree = "ls --tree";
     v = "ls -l";

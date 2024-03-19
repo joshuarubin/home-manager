@@ -3,6 +3,14 @@ path=(
   $path
 )
 
+# add some bash completions
+
+autoload -U +X bashcompinit && bashcompinit
+
+if [[ $+commands[terraform] ]]; then
+  complete -o nospace -C terraform terraform
+fi
+
 setopt ALWAYS_TO_END          # Move cursor to the end of a completed word
 setopt AUTO_CD
 setopt AUTO_PARAM_SLASH       # If completed parameter is a directory, add a trailing slash.
