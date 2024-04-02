@@ -2,6 +2,7 @@
 *.swp
 *~
 .git*
+!.github/
 .mypy_cache/
 .project
 .zfs/
