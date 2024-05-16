@@ -82,6 +82,7 @@
 
       init = {
         defaultBranch = "main";
+        templateDir = "~/.config/git/template";
       };
 
       credential = {
