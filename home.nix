@@ -19,5 +19,7 @@
     };
   };
 
+  news.display = "silent";
+
   targets.genericLinux.enable = genericLinux;
 }

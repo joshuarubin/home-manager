@@ -175,7 +175,7 @@ add-zsh-hook preexec jawa_preexec
 
 . $HOME/.nix-profile/etc/grc.zsh
 
-unset -f ip
+unset -f ip 2> /dev/null || true
 
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$("$BASE16_SHELL/profile_helper.sh")"
 

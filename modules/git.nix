@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  hostname,
+  gpgKey,
+  ...
+}: {
   programs.git = {
     enable = true;
     aliases = {
@@ -86,7 +92,7 @@
       };
 
       credential = {
-        helper = "/usr/local/bin/git-credential-manager";
+        helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
       };
 
       commit = {
@@ -172,62 +178,54 @@
       "tmp"
     ];
 
-    includes = [
-      {
-        condition = "hasconfig:remote.*.url:https://github.com/**";
-        contents = {
-          credential = {
-            username = "joshuarubin";
-            credentialStore = "gpg"; # TODO(jawa) this depends on os
+    includes =
+      [
+        {
+          condition = "hasconfig:remote.*.url:https://github.com/**";
+          contents = {
+            credential =
+              {
+                username = "joshuarubin";
+              }
+              // lib.optionalAttrs (hostname == "jrubin") {credentialStore = "gpg";};
           };
-        };
-      }
-      {
-        condition = "hasconfig:remote.*.url:https://github.com/groq-psw/**";
-        contents = {
-          user = {
-            email = "jrubin@groq.com";
-          };
+        }
+        {
+          condition = "hasconfig:remote.*.url:https://github.com/groq/**";
+          contents = {
+            user = {
+              email = "jrubin@groq.com";
+            };
 
-          credential = {
-            username = "jrubin_groq";
-            credentialStore = "gpg"; # TODO(jawa) this depends on os
+            credential =
+              {
+                username = "joshuarubin";
+              }
+              // lib.optionalAttrs (hostname == "jrubin") {credentialStore = "gpg";};
           };
-        };
-      }
-      {
-        condition = "hasconfig:remote.*.url:https://github.com/groq/**";
-        contents = {
-          user = {
-            email = "jrubin@groq.com";
-          };
+        }
+      ]
+      ++ lib.optionals (hostname == "jrubin") [
+        {
+          condition = "hasconfig:remote.*.url:git@git.groq.io:*/**";
+          contents = {
+            user = {
+              email = "jrubin@groq.com";
+            };
 
-          credential = {
-            username = "joshuarubin";
-            credentialStore = "gpg"; # TODO(jawa) this depends on os
+            credential = {
+              username = "jrubin_groq";
+              credentialStore = "gpg";
+            };
           };
-        };
-      }
-      {
-        condition = "hasconfig:remote.*.url:git@git.groq.io:*/**";
-        contents = {
-          user = {
-            email = "jrubin@groq.com";
-          };
-
-          credential = {
-            username = "jrubin_groq";
-            credentialStore = "gpg"; # TODO(jawa) this depends on os
-          };
-        };
-      }
-    ];
+        }
+      ];
 
     lfs.enable = true;
 
     signing = {
       signByDefault = true;
-      key = "50116F3E17627303"; # TODO(jawa)
+      key = gpgKey;
     };
 
     userEmail = "me@jawa.dev";
