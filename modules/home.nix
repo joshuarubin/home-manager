@@ -1,19 +1,23 @@
-{sysConfig, ...}: {
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = sysConfig.username;
-  home.homeDirectory = sysConfig.homeDirectory;
+{
+  sysConfig,
+  outputs,
+  genericLinux,
+  ...
+}: {
+  home = {
+    inherit (sysConfig) username homeDirectory stateVersion;
+  };
 
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = sysConfig.stateVersion;
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+    ];
 
-  # TODO(jawa)
-  targets.genericLinux.enable = true;
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+  targets.genericLinux.enable = genericLinux;
 }

@@ -5,6 +5,7 @@
 !.github/
 .mypy_cache/
 .project
+.yarn/
 .zfs/
 bower_components/
 node_modules/

@@ -2,7 +2,6 @@
   description = "Home Manager configuration of Joshua Rubin";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -11,43 +10,51 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     home-manager,
     ...
-  }: let
-    system = "x86_64-linux"; # TODO(jawa)
-    pkgs = import nixpkgs {
-      inherit system;
-      overlays = [
-        (import ./overlays/local.nix)
-      ];
-      config.allowUnfreePredicate = pkg:
-        builtins.elem (pkgs.lib.getName pkg) [
-          "infra"
-          "terraform"
-          "vault"
-        ];
-    };
+  } @ inputs: let
+    inherit (self) outputs;
+
+    systems = [
+      "x86_64-linux"
+      "aarch64-darwin"
+    ];
+
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    homeConfigurations.jrubin = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
-      modules = [
-        ./modules/files.nix
-        ./modules/git.nix
-        ./modules/home.nix
-        ./modules/packages.nix
-        ./modules/programs.nix
-        ./modules/services.nix
-        ./modules/systemd.nix
-        ./modules/zsh.nix
-      ];
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-      extraSpecialArgs = {
-        sysConfig = {
-          username = "jrubin";
-          homeDirectory = "/home/jrubin";
-          stateVersion = "23.05";
+    overlays = import ./overlays {inherit inputs;};
+
+    homeManagerModules = import ./modules/home-manager;
+
+    homeConfigurations = {
+      "jrubin@jrubin" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+
+        modules = [
+          ./modules/files.nix
+          ./modules/git.nix
+          ./modules/home.nix
+          ./modules/packages.nix
+          ./modules/programs.nix
+          ./modules/services.nix
+          ./modules/systemd.nix
+          ./modules/zsh.nix
+        ];
+
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          sysConfig = {
+            username = "jrubin";
+            homeDirectory = "/home/jrubin";
+            stateVersion = "23.05";
+          };
+          genericLinux = true;
         };
       };
     };
