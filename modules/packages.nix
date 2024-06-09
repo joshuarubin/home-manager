@@ -19,7 +19,6 @@
     buf
     c-ares
     cargo
-    chezmoi
     clippy
     cmake
     colordiff

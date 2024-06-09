@@ -1,0 +1,49 @@
+Host *
+  ControlMaster auto
+  ControlPersist 300
+  ControlPath ~/.ssh/connections/%r_%h_%p
+  Compression yes
+  ServerAliveInterval 120
+  ServerAliveCountMax 3
+
+# make things fast for things we know shouldn't be canonicalized
+Host * !github.com !*.sft !*.asa !jrubin !*.dev.psw.groq.internal !*.groq.tech !*.local
+  CanonicalizeHostname always
+  CanonicalDomains dev.psw.groq.internal groq.tech local
+
+Host balerion pi4 *.sft *.asa jrubin *.dev.psw.groq.internal *.groq.tech *.local
+  ForwardAgent yes
+
+Host pi4
+  User pi
+
+Host github.com
+  User git
+
+Host pi-star
+  User pi-star
+
+Host jrubin
+  Hostname 10.180.0.5
+
+Host homeassistant
+  User root
+
+Host jrubin.sft
+  ProxyCommand sft proxycommand "jrubin" --via asabastion-us-west3.groq.net
+  UserKnownHostsFile ~/Library/Application\ Support/ScaleFT/proxycommand_known_hosts
+
+Host *.sft
+  ProxyCommand sft proxycommand "$(basename -s .sft %h)"
+  UserKnownHostsFile ~/Library/Application\ Support/ScaleFT/proxycommand_known_hosts
+
+Match canonical host *.dev.psw.groq.internal exec "(find ~/.cloudflared/%n.groq.tech-cf_key-cert.pub -mmin -3 2>/dev/null || true) | grep -q . || cloudflared access ssh-gen --hostname %n.groq.tech"
+  IdentityFile ~/.cloudflared/%n.groq.tech-cf_key
+  CertificateFile ~/.cloudflared/%n.groq.tech-cf_key-cert.pub
+
+Match canonical host *.groq.tech exec "(find ~/.cloudflared/%h-cf_key-cert.pub -mmin -3 2>/dev/null || true) | grep -q . || cloudflared access ssh-gen --hostname %h"
+  IdentityFile ~/.cloudflared/%h-cf_key
+  CertificateFile ~/.cloudflared/%h-cf_key-cert.pub
+  ProxyCommand cloudflared access ssh --hostname %h
+
+# vim: ft=sshconfig nospell

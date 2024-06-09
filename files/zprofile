@@ -1,0 +1,12 @@
+if [ -r /etc/paths ]; then
+  # macOS, in /etc/zprofile, uses /usr/lib/path_helper to add items to the path
+  # the base paths, in /etc/paths, need to be moved to the beginning of $PATH
+
+  while IFS="" read -r p || [ -n "$p" ]; do
+    # remove the item from the path
+    path[${path[(i)$p]}]=()
+
+    # append it to the end
+    path+=($p)
+  done < /etc/paths
+fi

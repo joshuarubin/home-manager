@@ -67,6 +67,7 @@
 
         modules = [
           ./home.nix
+          ./modules/aarch64-darwin/files.nix
           ./modules/aarch64-darwin/packages.nix
           ./modules/files.nix
           ./modules/git.nix
