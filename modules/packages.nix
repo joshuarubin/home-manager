@@ -95,8 +95,6 @@
     nodejs_22
     openssl
     pass
-    php
-    php81Packages.composer
     pkg-config
     postgresql
     pre-commit
