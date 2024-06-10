@@ -26,5 +26,5 @@
     };
   };
 
-  xdg.configFile."et/et.cfg".source = ../files/config/et.cfg;
+  xdg.configFile."et/et.cfg".source = ../../files/config/et.cfg;
 }
