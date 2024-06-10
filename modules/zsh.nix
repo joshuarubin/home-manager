@@ -2,7 +2,7 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    cdpath = ["." "$HOME" "$HOME/dev/cloud" "$HOME/dev"];
+    cdpath = ["." "$HOME" "$HOME/dev/groq" "$HOME/dev/cloud" "$HOME/dev"];
     autosuggestion = {
       enable = true;
     };
@@ -73,13 +73,15 @@
     # MAKEFLAGS = "-j <numcpu>"; # TODO(jawa)
     # SSH_AUTH_SOCK = ""; # TODO(jawa)
     EDITOR = "nvim";
-    GOPRIVATE = "github.com/groq-psw,git.groq.io";
+    GOPROXY = "https://proxy.golang.org,direct";
+    GOSUMDB = "sum.golang.org";
     GREP_COLOR = "1;33";
     GREP_COLORS = "mt=\${GREP_COLOR}";
     LESS = "-F -g -i -M -R -X";
     LESSOPEN = "| lesspipe.sh %s";
     LS_COLORS = "di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:";
     PAGER = "less";
+    PATH = "$HOME/go/bin:$PATH";
     RIPGREP_CONFIG_PATH = "$HOME/.ripgreprc";
     USE_GKE_GCLOUD_AUTH_PLUGIN = "True";
     VISUAL = "nvim";

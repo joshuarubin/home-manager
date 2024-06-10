@@ -42,5 +42,13 @@ _: {
       nix-direnv.enable = true;
       enableZshIntegration = true;
     };
+
+    go = {
+      enable = true;
+      goPrivate = [
+        "github.com/groq"
+        "git.groq.io"
+      ];
+    };
   };
 }

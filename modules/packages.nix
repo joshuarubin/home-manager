@@ -52,7 +52,6 @@
     glow
     gnumake
     gnupg
-    go
     go-task
     go-tools
     gofumpt
