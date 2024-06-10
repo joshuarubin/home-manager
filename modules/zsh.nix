@@ -96,8 +96,8 @@
     cat = "bat";
     cd = "nocorrect cd";
     cdc = "cd && clear";
-    chmod = "chmod --preserve-root -v";
-    chown = "chown --preserve-root -v";
+    chmod = "chmod -v";
+    chown = "chown -v";
     cp = "nocorrect cp -i";
     df = "duf --hide-mp '*.zfs/snapshot/*,*/keybase/*' --hide special";
     du = "dust";
