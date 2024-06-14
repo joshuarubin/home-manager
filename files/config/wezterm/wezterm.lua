@@ -48,19 +48,6 @@ local function is_vim(pane)
 	return process_name(pane):find("n?vim") ~= nil
 end
 
-local function paste(win, pane, key)
-	if is_local_domain(pane) and is_vim(pane) then
-		if key.mods == "SUPER" and key.key == "v" then
-			win:perform_action(wezterm.action.SendString("\x01v"), pane)
-		else
-			win:perform_action(wezterm.action.SendKey(key), pane)
-		end
-		return
-	end
-
-	win:perform_action(wezterm.action.PasteFrom("Clipboard"), pane)
-end
-
 local function active_pane_info(win)
 	local mux_tab = win:active_tab()
 
@@ -183,29 +170,11 @@ return {
 
 		-- copy/paste
 		{ mods = "SUPER", key = "c", action = wezterm.action.CopyTo("Clipboard") },
-		{
-			mods = "SUPER",
-			key = "v",
-			action = wezterm.action_callback(function(win, pane)
-				paste(win, pane, { mods = "SUPER", key = "v" })
-			end),
-		},
+		{ mods = "SUPER", key = "v", action = wezterm.action.PasteFrom("Clipboard") },
 		{ mods = "CTRL|SHIFT", key = "C", action = wezterm.action.CopyTo("Clipboard") },
-		{
-			mods = "CTRL|SHIFT",
-			key = "V",
-			action = wezterm.action_callback(function(win, pane)
-				paste(win, pane, { mods = "CTRL|SHIFT", key = "V" })
-			end),
-		},
+		{ mods = "CTRL|SHIFT", key = "V", action = wezterm.action.PasteFrom("Clipboard") },
 		{ key = "Copy", action = wezterm.action.CopyTo("Clipboard") },
-		{
-			-- mods = "SUPER",
-			key = "Paste",
-			action = wezterm.action_callback(function(win, pane)
-				paste(win, pane, { key = "Paste" })
-			end),
-		},
+		{ key = "Paste", action = wezterm.action.PasteFrom("Clipboard") },
 		{ mods = "CTRL", key = "Insert", action = wezterm.action.CopyTo("PrimarySelection") },
 		{ mods = "SHIFT", key = "Insert", action = wezterm.action.PasteFrom("PrimarySelection") },
 		{
