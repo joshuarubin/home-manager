@@ -34,10 +34,6 @@
       source = ../files/wezterm.terminfo;
       onChange = "tic -x -o ~/.terminfo ~/.terminfo.wezterm";
     };
-    ".vale.ini" = {
-      source = ../files/vale.ini;
-      onChange = "vale sync";
-    };
     ".zprofile".source = ../files/zprofile;
     ".zsh/functions".source = ../files/zsh/functions;
   };
@@ -50,5 +46,9 @@
     "safe-rm".source = ../files/config/safe-rm;
     "wezterm/wezterm.lua".source = ../files/config/wezterm/wezterm.lua;
     "yamllint/config".source = ../files/config/yamllint/config;
+    "vale/.vale.ini" = {
+      source = ../files/vale.ini;
+      onChange = "${pkgs.vale}/bin/vale sync";
+    };
   };
 }
