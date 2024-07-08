@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  gdk = pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
+    gke-gcloud-auth-plugin
+  ]);
+in {
   home.packages = with pkgs; [
     _1password
     act
@@ -57,8 +61,9 @@
     gofumpt
     golangci-lint
     golint
-    google-cloud-sdk
+    gdk
     gopls
+    goreleaser
     gotools
     grc
     grpc
