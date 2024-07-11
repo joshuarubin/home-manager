@@ -49,6 +49,7 @@ in {
     flyctl
     fzf
     gcc
+    gdk
     gh
     git
     git-credential-manager
@@ -61,7 +62,6 @@ in {
     gofumpt
     golangci-lint
     golint
-    gdk
     gopls
     goreleaser
     gotools
@@ -69,6 +69,7 @@ in {
     grpc
     grpcurl
     helmfile
+    hiera-eyaml
     htop
     inetutils
     ipcalc
