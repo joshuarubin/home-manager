@@ -4,7 +4,6 @@
   ]);
 in {
   home.packages = with pkgs; [
-    _1password
     act
     alejandra
     aria2
@@ -39,6 +38,7 @@ in {
     difftastic
     dig
     direnv
+    docker-buildx
     docker-compose
     docker-credential-helpers
     docutils
@@ -46,6 +46,7 @@ in {
     duf
     eternal-terminal
     eza
+    fluxcd
     flyctl
     fzf
     gcc
@@ -68,7 +69,6 @@ in {
     grc
     grpc
     grpcurl
-    helmfile
     hiera-eyaml
     htop
     inetutils
@@ -95,12 +95,15 @@ in {
     neovim-remote
     nmap
     nodePackages.cdk8s-cli
+    nodePackages.cdktf-cli
     nodePackages.eslint
     nodePackages.prettier
     nodejs_22
     openssl
+    opentofu
     pass
     pkg-config
+    podman
     postgresql
     pre-commit
     process-compose
@@ -131,13 +134,11 @@ in {
     statix
     stylua
     tanka
-    terraform
     tmate
     tree-sitter
     unbound
     unzip
     vale
-    vault
     wdiff
     wezterm
     wget

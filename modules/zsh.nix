@@ -136,7 +136,8 @@
     mv = "nocorrect mv -i";
     rm = "nocorrect safe-rm";
     rsync = "noglob rsync";
-    tf = "terraform";
+    terraform = "tofu";
+    tf = "tofu";
     top = "htop";
     tree = "ls --tree";
     v = "ls -l";

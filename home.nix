@@ -14,9 +14,9 @@
       outputs.overlays.modifications
     ];
 
-    config = {
-      allowUnfree = true;
-    };
+    # config = {
+    #   allowUnfree = true;
+    # };
   };
 
   news.display = "silent";
