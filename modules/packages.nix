@@ -66,6 +66,7 @@ in {
     gopls
     goreleaser
     gotools
+    graphviz
     grc
     grpc
     grpcurl
