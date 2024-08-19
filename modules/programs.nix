@@ -46,8 +46,6 @@ _: {
     go = {
       enable = true;
       goPrivate = [
-        "github.com/groq"
-        "git.groq.io"
       ];
     };
   };

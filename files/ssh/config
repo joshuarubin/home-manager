@@ -7,11 +7,11 @@ Host *
   ServerAliveCountMax 3
 
 # make things fast for things we know shouldn't be canonicalized
-Host * !github.com !*.sft !*.asa !jrubin !*.local
+Host * !github.com !*.local
   CanonicalizeHostname always
   CanonicalDomains local
 
-Host balerion pi4 *.sft *.asa jrubin *.local
+Host balerion pi4 *.local
   ForwardAgent yes
 
 Host pi4
@@ -23,18 +23,7 @@ Host github.com
 Host pi-star
   User pi-star
 
-Host jrubin
-  Hostname 10.180.0.5
-
 Host homeassistant
   User root
-
-Host jrubin.sft
-  ProxyCommand sft proxycommand "jrubin" --via asabastion-us-west3.groq.net
-  UserKnownHostsFile ~/Library/Application\ Support/ScaleFT/proxycommand_known_hosts
-
-Host *.sft
-  ProxyCommand sft proxycommand "$(basename -s .sft %h)"
-  UserKnownHostsFile ~/Library/Application\ Support/ScaleFT/proxycommand_known_hosts
 
 # vim: ft=sshconfig nospell

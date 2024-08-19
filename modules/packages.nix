@@ -103,8 +103,10 @@ in {
     openssl
     opentofu
     pass
+    pipx
     pkg-config
     podman
+    poetry
     postgresql
     pre-commit
     process-compose

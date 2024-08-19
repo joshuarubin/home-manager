@@ -500,12 +500,5 @@ return {
 			username = "jrubin",
 			assume_shell = "Posix",
 		},
-		{
-			name = "jrubin",
-			remote_address = "jrubin",
-			username = "jrubin",
-			assume_shell = "Posix",
-			local_echo_threshold_ms = 300,
-		},
 	},
 }

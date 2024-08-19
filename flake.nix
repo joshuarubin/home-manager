@@ -33,36 +33,7 @@
     homeManagerModules = import ./modules/home-manager;
 
     homeConfigurations = {
-      "jrubin@jrubin" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-        modules = [
-          ./home.nix
-          ./modules/files.nix
-          ./modules/git.nix
-          ./modules/packages.nix
-          ./modules/programs.nix
-          ./modules/x86_64-linux/packages.nix
-          ./modules/x86_64-linux/services.nix
-          ./modules/x86_64-linux/systemd.nix
-          ./modules/zsh.nix
-        ];
-
-        extraSpecialArgs = {
-          inherit inputs outputs;
-          sysConfig = {
-            username = "jrubin";
-            homeDirectory = "/home/jrubin";
-            stateVersion = "23.05";
-          };
-          genericLinux = true;
-          hostname = "jrubin";
-          system = "x86_64-linux";
-          gpgKey = "50116F3E17627303";
-        };
-      };
-
-      "jrubin@vhagar" = home-manager.lib.homeManagerConfiguration {
+      "jrubin@vermithor" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
 
         modules = [
@@ -84,7 +55,7 @@
             stateVersion = "23.05";
           };
           genericLinux = false;
-          hostname = "vhagar";
+          hostname = "vermithor";
           system = "aarch64-darwin";
           gpgKey = "71AA74EA6C4CA520";
         };

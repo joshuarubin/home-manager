@@ -178,48 +178,16 @@
       "tmp"
     ];
 
-    includes =
-      [
-        {
-          condition = "hasconfig:remote.*.url:https://github.com/**";
-          contents = {
-            credential =
-              {
-                username = "joshuarubin";
-              }
-              // lib.optionalAttrs (hostname == "jrubin") {credentialStore = "gpg";};
+    includes = [
+      {
+        condition = "hasconfig:remote.*.url:https://github.com/**";
+        contents = {
+          credential = {
+            username = "joshuarubin";
           };
-        }
-        {
-          condition = "hasconfig:remote.*.url:https://github.com/groq/**";
-          contents = {
-            user = {
-              email = "jrubin@groq.com";
-            };
-
-            credential =
-              {
-                username = "joshuarubin";
-              }
-              // lib.optionalAttrs (hostname == "jrubin") {credentialStore = "gpg";};
-          };
-        }
-      ]
-      ++ lib.optionals (hostname == "jrubin") [
-        {
-          condition = "hasconfig:remote.*.url:git@git.groq.io:*/**";
-          contents = {
-            user = {
-              email = "jrubin@groq.com";
-            };
-
-            credential = {
-              username = "jrubin_groq";
-              credentialStore = "gpg";
-            };
-          };
-        }
-      ];
+        };
+      }
+    ];
 
     lfs.enable = true;
 

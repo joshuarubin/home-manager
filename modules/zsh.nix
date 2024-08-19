@@ -2,7 +2,7 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    cdpath = ["." "$HOME" "$HOME/dev/groq" "$HOME/dev/cloud" "$HOME/dev"];
+    cdpath = ["." "$HOME" "$HOME/dev/cloud" "$HOME/dev"];
     autosuggestion = {
       enable = true;
     };
