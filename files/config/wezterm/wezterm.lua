@@ -64,6 +64,11 @@ local function active_pane_info(win)
 end
 
 local function move_around(win, pane, direction_wez, direction_nvim)
+	if pane:tab():get_pane_direction(direction_wez) == nil then
+		win:perform_action(wezterm.action.SendKey({ mods = "CTRL", key = direction_nvim }), pane)
+		return
+	end
+
 	local name = process_name(pane)
 
 	if is_vim(pane) or name == "ssh" or name == "gcloud" or name == "et" then

@@ -1,5 +1,10 @@
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
 path=(
   "${HOME}/.local/bin"
+  "${HOME}/.yarn/bin"
   $path
 )
 
@@ -130,28 +135,6 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 
 # nicer looking kill completion
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
-
-prompt_lean_host=" %F{"$COLOR3"}%m%f"
-
-show_virtual_env() {
-  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
-    echo "($(basename $VIRTUAL_ENV)) "
-  fi
-}
-
-prompt_lean_precmd_patch () {
-  # use λ instead of % for prompt
-  PROMPT="$(show_virtual_env)${PROMPT:s/%#/%(\!.#.λ)/}"
-}
-
-zle-keymap-select () {
-  prompt_lean_precmd
-  prompt_lean_precmd_patch
-  zle reset-prompt
-}
-
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd prompt_lean_precmd_patch
 
 # -P     Perform prompt expansion
 # -r     Ignore the escape conventions of echo

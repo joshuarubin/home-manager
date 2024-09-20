@@ -48,5 +48,20 @@ _: {
       goPrivate = [
       ];
     };
+
+    starship = {
+      enable = true;
+      settings = {
+        add_newline = false;
+
+        format = "$character";
+        right_format = "$all";
+
+        character = {
+          success_symbol = "[λ](bold blue)";
+          error_symbol = "[λ](bold red)";
+        };
+      };
+    };
   };
 }

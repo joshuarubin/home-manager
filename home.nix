@@ -2,6 +2,7 @@
   sysConfig,
   outputs,
   genericLinux,
+  lib,
   ...
 }: {
   home = {
@@ -14,9 +15,12 @@
       outputs.overlays.modifications
     ];
 
-    # config = {
-    #   allowUnfree = true;
-    # };
+    config = {
+      allowUnfreePredicate = pkg:
+        builtins.elem (lib.getName pkg) [
+          "1password-cli"
+        ];
+    };
   };
 
   news.display = "silent";

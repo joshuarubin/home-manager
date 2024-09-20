@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -13,15 +13,6 @@
     defaultKeymap = "viins";
 
     plugins = [
-      {
-        name = "lean";
-        src = pkgs.fetchFromGitHub {
-          owner = "miekg";
-          repo = "lean";
-          rev = "a9cb0229dbfbaa8eb92ecc04672ab54176adc19d";
-          sha256 = "03awPTFjHqijcGKjAUyovugG7cejkeqbeqt0hjSMznM=";
-        };
-      }
     ];
 
     history = {
@@ -42,6 +33,8 @@
         "$HOME/.zsh/functions"
         $fpath
       )
+
+      autoload -Uz $fpath[1]/*(.:t)
     '';
 
     initExtra = builtins.readFile ../files/zshrc;
@@ -55,9 +48,6 @@
       HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND = "fg=yellow,bold";
       HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND = "bg=red,bold";
       KEYTIMEOUT = "1";
-      PROMPT_LEAN_NOTITLE = "1";
-      PROMPT_LEAN_VCS = 0;
-      PROMPT_LEAN_VIMODE = "1";
       WORDCHARS = "*?_-.[]~&;!#$%^(){}<>"; # remove =/ from the list
       ZSH_AUTOSUGGEST_MANUAL_REBIND = 1;
     };
@@ -71,7 +61,7 @@
   # NOTE: these are exported
   home.sessionVariables = {
     # MAKEFLAGS = "-j <numcpu>"; # TODO(jawa)
-    # SSH_AUTH_SOCK = ""; # TODO(jawa)
+    SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
     EDITOR = "nvim";
     GOPROXY = "https://proxy.golang.org,direct";
     GOSUMDB = "sum.golang.org";

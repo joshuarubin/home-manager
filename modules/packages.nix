@@ -4,6 +4,7 @@
   ]);
 in {
   home.packages = with pkgs; [
+    _1password
     act
     alejandra
     aria2
@@ -100,10 +101,10 @@ in {
     nodePackages.eslint
     nodePackages.prettier
     nodejs_22
+    nssTools
     openssl
     opentofu
     pass
-    pipx
     pkg-config
     podman
     poetry
@@ -113,10 +114,21 @@ in {
     prometheus
     protobuf
     pulumi-bin
-    python3
-    python312Packages.fonttools
-    python312Packages.identify
-    python312Packages.pip
+    (python3.withPackages (ps:
+      with ps; [
+        black
+        flake8
+        fonttools
+        identify
+        numpy
+        pip
+        pipx
+        pylint
+        pytest
+        torch
+        torchaudio
+        torchvision
+      ]))
     ran
     redis
     ripgrep
@@ -137,6 +149,7 @@ in {
     statix
     stylua
     tanka
+    temporal-cli
     tmate
     tree-sitter
     unbound
