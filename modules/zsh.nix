@@ -44,7 +44,6 @@ _: {
     # TODO(jawa)
     # NOTE: these are not exported
     localVariables = {
-      BASE16_SHELL = "$HOME/.config/base16-shell/";
       HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND = "fg=yellow,bold";
       HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND = "bg=red,bold";
       KEYTIMEOUT = "1";
