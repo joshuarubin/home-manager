@@ -125,9 +125,9 @@ in {
         pipx
         pylint
         pytest
-        torch
-        torchaudio
-        torchvision
+        torch-bin
+        torchaudio-bin
+        torchvision-bin
       ]))
     ran
     redis

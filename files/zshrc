@@ -165,6 +165,9 @@ unset -f ip 2> /dev/null || true
 
 ls () {
   local args=(--git -g --group-directories-first --icons)
+  if [ "$TERM_PROGRAM" = "vscode" ]; then
+    args=($args --icons=never)
+  fi
   if [ "$1" = "-ltr" -o "$1" = "-lrt" ]; then
     args=($args -lsnew ${@:2})
   elif [ "$1" = "-ltra" -o "$1" = "-lrta" ]; then
