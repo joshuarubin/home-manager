@@ -16,6 +16,7 @@ in {
     bash
     bat
     bazel
+    bazelisk
     bc
     bfg-repo-cleaner
     bind
@@ -23,6 +24,7 @@ in {
     buf
     c-ares
     cargo
+    clickhouse
     clippy
     cmake
     colordiff
@@ -50,7 +52,6 @@ in {
     fluxcd
     flyctl
     fzf
-    gcc
     gdk
     gh
     git
@@ -59,7 +60,6 @@ in {
     glow
     gnumake
     gnupg
-    go-task
     go-tools
     gofumpt
     golangci-lint

@@ -7,6 +7,7 @@
 }: {
   home.file = {
     ".actrc".source = ../files/actrc;
+    ".aws/config".source = ../files/aws/config;
     ".bash_profile".source = ../files/bash_profile;
     ".bashrc".source = ../files/bashrc;
     ".ctags".source = ../files/ctags;

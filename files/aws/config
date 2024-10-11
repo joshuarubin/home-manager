@@ -1,0 +1,31 @@
+[default]
+sso_region = us-east-1
+sso_start_url = https://poolside.awsapps.com/start#
+sso_registration_scopes = sso:account:access
+sso_session = Poolside
+sso_account_id = 939990436136
+sso_role_name = AdministratorAccess
+region = us-east-1
+
+[sso-session Poolside]
+sso_start_url = https://poolside.awsapps.com/start#
+sso_region = us-east-1
+sso_registration_scopes = sso:account:access
+
+[profile sandbox]
+sso_session = Poolside
+sso_account_id = 992382466748
+sso_role_name = AdministratorAccess
+region = eu-central-1
+
+[profile platform]
+sso_session = Poolside
+sso_account_id = 339712949629
+sso_role_name = AdministratorAccess
+region = us-east-1
+
+[profile dev]
+sso_session = Poolside
+sso_account_id = 939990436136
+sso_role_name = AdministratorAccess
+region = us-east-1

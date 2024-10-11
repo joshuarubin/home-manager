@@ -2,7 +2,7 @@ _: {
   programs.zsh = {
     enable = true;
     autocd = true;
-    cdpath = ["." "$HOME" "$HOME/dev/cloud" "$HOME/dev"];
+    cdpath = ["." "$HOME" "$HOME/dev/poolside" "$HOME/dev"];
     autosuggestion = {
       enable = true;
     };
