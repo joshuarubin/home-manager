@@ -1,7 +1,5 @@
 {
-  lib,
   pkgs,
-  hostname,
   gpgKey,
   ...
 }: {
@@ -179,6 +177,14 @@
     ];
 
     includes = [
+      {
+        condition = "hasconfig:remote.*.url:https://github.com/poolsideai/**";
+        contents = {
+          user = {
+            email = "joshua@poolside.ai";
+          };
+        };
+      }
       {
         condition = "hasconfig:remote.*.url:https://github.com/**";
         contents = {

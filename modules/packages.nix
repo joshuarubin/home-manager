@@ -60,6 +60,7 @@ in {
     glow
     gnumake
     gnupg
+    go-migrate
     go-tools
     gofumpt
     golangci-lint

@@ -46,6 +46,7 @@ _: {
     go = {
       enable = true;
       goPrivate = [
+        "github.com/poolsideai/*"
       ];
     };
 
