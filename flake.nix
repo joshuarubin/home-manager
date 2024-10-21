@@ -60,6 +60,34 @@
           gpgKey = "71AA74EA6C4CA520";
         };
       };
+
+      "jrubin@tessarion" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+
+        modules = [
+          ./home.nix
+          ./modules/aarch64-darwin/files.nix
+          ./modules/aarch64-darwin/packages.nix
+          ./modules/files.nix
+          ./modules/git.nix
+          ./modules/packages.nix
+          ./modules/programs.nix
+          ./modules/zsh.nix
+        ];
+
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          sysConfig = {
+            username = "jrubin";
+            homeDirectory = "/Users/jrubin";
+            stateVersion = "23.05";
+          };
+          genericLinux = false;
+          hostname = "tessarion";
+          system = "aarch64-darwin";
+          gpgKey = "71AA74EA6C4CA520";
+        };
+      };
     };
   };
 }

@@ -493,7 +493,7 @@ return {
 		saturation = 0.7,
 		brightness = 0.7,
 	},
-	color_scheme = "Kanagawa",
+	color_scheme = "GruvboxDark",
 	use_fancy_tab_bar = true,
 	bold_brightens_ansi_colors = true,
 	default_cursor_style = "SteadyBlock",
