@@ -12,7 +12,6 @@ in {
     asdf-vm
     awscli2
     axel
-    azure-cli
     bash
     bat
     bazel
@@ -49,6 +48,7 @@ in {
     duf
     eternal-terminal
     eza
+    fd
     fluxcd
     flyctl
     fzf
@@ -94,7 +94,6 @@ in {
     luajitPackages.tl
     mkcert
     mockgen
-    mosh
     neovim-remote
     nmap
     nodePackages.cdk8s-cli
@@ -124,6 +123,7 @@ in {
         numpy
         pip
         pipx
+        pylatexenc
         pylint
         pytest
         torch-bin

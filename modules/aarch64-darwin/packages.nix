@@ -4,6 +4,7 @@
     coreutils-prefixed
     docker-client
     lima-bin
+    pngpaste
     pinentry_mac
   ];
 }
