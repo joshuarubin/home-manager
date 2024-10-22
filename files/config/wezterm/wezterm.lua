@@ -508,7 +508,7 @@ return {
 	check_for_updates = true,
 	check_for_updates_interval_seconds = 86400,
 	enable_scroll_bar = true,
-	native_macos_fullscreen_mode = false,
+	native_macos_fullscreen_mode = true,
 	pane_focus_follows_mouse = true,
 	quote_dropped_files = "SpacesOnly",
 	scroll_to_bottom_on_input = true,
