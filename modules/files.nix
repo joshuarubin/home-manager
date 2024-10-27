@@ -45,7 +45,10 @@
     "nixpkgs/config.nix".source = ../files/config/nixpkgs/config.nix;
     "pylintrc".source = ../files/config/pylintrc;
     "safe-rm".source = ../files/config/safe-rm;
-    "wezterm/wezterm.lua".source = ../files/config/wezterm/wezterm.lua;
+    "wezterm" = {
+      source = ../files/config/wezterm;
+      recursive = true;
+    };
     "yamllint/config".source = ../files/config/yamllint/config;
     "vale/.vale.ini" = {
       source = ../files/vale.ini;

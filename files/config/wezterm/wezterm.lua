@@ -450,7 +450,7 @@ return {
 				"#d5c4a1",
 			},
 		},
-		["Kanagawa"] = {
+		Kanagawa = {
 			foreground = "#dcd7ba",
 			background = "#1f1f28",
 			cursor_bg = "#c8c093",
@@ -488,12 +488,30 @@ return {
 				[17] = "#ff5d62",
 			},
 		},
+		cyberdream = {
+			foreground = "#ffffff",
+			background = "#16181a",
+
+			cursor_bg = "#ffffff",
+			cursor_fg = "#16181a",
+			cursor_border = "#ffffff",
+
+			selection_fg = "#ffffff",
+			selection_bg = "#3c4048",
+
+			scrollbar_thumb = "#16181a",
+			split = "#16181a",
+
+			ansi = { "#16181a", "#ff6e5e", "#5eff6c", "#f1ff5e", "#5ea1ff", "#bd5eff", "#5ef1ff", "#ffffff" },
+			brights = { "#3c4048", "#ff6e5e", "#5eff6c", "#f1ff5e", "#5ea1ff", "#bd5eff", "#5ef1ff", "#ffffff" },
+			indexed = { [16] = "#ffbd5e", [17] = "#ff6e5e" },
+		},
 	},
 	inactive_pane_hsb = {
 		saturation = 0.7,
 		brightness = 0.7,
 	},
-	color_scheme = "Gruvbox Dark Hard",
+	color_scheme = "GruvboxDarkHard",
 	use_fancy_tab_bar = true,
 	bold_brightens_ansi_colors = true,
 	default_cursor_style = "SteadyBlock",
@@ -529,6 +547,8 @@ return {
 	unzoom_on_switch_pane = true,
 	use_resize_increments = false,
 	warn_about_missing_glyphs = true,
+	-- window_background_opacity = 0.9,
+	-- macos_window_background_blur = 20,
 	window_decorations = "TITLE | RESIZE",
 	window_padding = {
 		left = 0,

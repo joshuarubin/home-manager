@@ -1,0 +1,6 @@
+---
+gui:
+  splitDiff: "always"
+  theme:
+    selectedLineBgColor:
+      - blue
