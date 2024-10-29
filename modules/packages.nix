@@ -161,6 +161,7 @@ in {
     wget
     wire
     yamllint
+    zig
     zlib
     zoxide
     zsh-completions

@@ -1,6 +1,21 @@
 local wezterm = require("wezterm")
 
-local function italic(data)
+local function normalFontConf(data)
+	data = data or {}
+	local conf = {
+		family = "JetBrainsMono Nerd Font",
+	}
+	for k, v in pairs(data) do
+		conf[k] = v
+	end
+	return conf
+end
+
+local function normalFont(data)
+	return wezterm.font(normalFontConf(data))
+end
+
+local function italicFont(data)
 	data = data or {}
 	local conf = {
 		family = "Cascadia Code PL",
@@ -10,7 +25,10 @@ local function italic(data)
 	for k, v in pairs(data) do
 		conf[k] = v
 	end
-	return wezterm.font(conf)
+	return wezterm.font_with_fallback({
+		conf,
+		normalFontConf(),
+	})
 end
 
 local function basename(s)
@@ -144,29 +162,35 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 end)
 
 return {
-	font = wezterm.font("JetBrainsMono Nerd Font"),
+	font = normalFont(),
 	font_rules = {
-		{
-			italic = true,
-			font = italic(),
-		},
 		{
 			intensity = "Normal",
 			italic = true,
-			font = italic(),
+			font = italicFont(),
+		},
+		{
+			intensity = "Bold",
+			italic = false,
+			font = normalFont({
+				weight = "Bold",
+			}),
 		},
 		{
 			intensity = "Bold",
 			italic = true,
-			font = italic({
+			font = italicFont({
 				weight = "Bold",
 			}),
 		},
 	},
 	window_frame = {
-		font = wezterm.font({
-			family = "Helvetica Neue",
-			weight = "Bold",
+		font = wezterm.font_with_fallback({
+			{
+				family = "Helvetica Neue",
+				weight = "Bold",
+			},
+			normalFontConf(),
 		}),
 	},
 	disable_default_key_bindings = true,
