@@ -1,4 +1,4 @@
-_: {
+{config, ...}: {
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -60,7 +60,7 @@ _: {
   # NOTE: these are exported
   home.sessionVariables = {
     # MAKEFLAGS = "-j <numcpu>"; # TODO(jawa)
-    SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+    PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
     EDITOR = "nvim";
     GOPROXY = "https://proxy.golang.org,direct";
     GOSUMDB = "sum.golang.org";
@@ -72,6 +72,7 @@ _: {
     PAGER = "less";
     PATH = "$HOME/go/bin:$PATH";
     RIPGREP_CONFIG_PATH = "$HOME/.ripgreprc";
+    SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
     USE_GKE_GCLOUD_AUTH_PLUGIN = "True";
     VISUAL = "nvim";
     WINEARCH = "win32";

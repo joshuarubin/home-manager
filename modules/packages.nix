@@ -10,6 +10,8 @@ in {
     aria2
     asciinema
     asdf-vm
+    autoconf
+    automake
     awscli2
     axel
     bash
@@ -61,6 +63,7 @@ in {
     gnumake
     gnupg
     go-migrate
+    go-mockery
     go-tools
     gofumpt
     golangci-lint
@@ -89,6 +92,7 @@ in {
     lazygit
     less
     lesspipe
+    libtool
     lua
     luajitPackages.luarocks
     luajitPackages.tl
@@ -138,6 +142,8 @@ in {
     rustc
     rustfmt
     safe-rm
+    sentencepiece
+    sentencepiece.dev
     shellcheck
     shfmt
     simplehttp2server
