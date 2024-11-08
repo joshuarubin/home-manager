@@ -571,7 +571,7 @@ return {
 	unzoom_on_switch_pane = true,
 	use_resize_increments = false,
 	warn_about_missing_glyphs = true,
-	window_background_opacity = 0.85,
+	window_background_opacity = 0.90,
 	macos_window_background_blur = 20,
 	window_decorations = "TITLE | RESIZE",
 	window_padding = {

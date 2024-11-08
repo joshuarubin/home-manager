@@ -6,6 +6,7 @@ in {
   home.packages = with pkgs; [
     _1password
     act
+    aider-chat
     alejandra
     aria2
     asciinema
@@ -17,6 +18,7 @@ in {
     bash
     bat
     bazel
+    bazel-buildtools
     bazelisk
     bc
     bfg-repo-cleaner
@@ -121,18 +123,25 @@ in {
     (python3.withPackages (ps:
       with ps; [
         black
+        boto3
+        botocore
+        clickhouse-connect
         flake8
         fonttools
         identify
         numpy
+        pandas
+        pandas-stubs
         pip
         pipx
         pylatexenc
         pylint
         pytest
+        python-dotenv
         torch-bin
         torchaudio-bin
         torchvision-bin
+        tqdm
       ]))
     ran
     redis
@@ -171,5 +180,6 @@ in {
     zlib
     zoxide
     zsh-completions
+    zstd
   ];
 }
