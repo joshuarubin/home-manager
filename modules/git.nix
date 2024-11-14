@@ -96,6 +96,10 @@
       commit = {
         template = "~/.config/git/message";
       };
+
+      merge = {
+        tool = "nvimdiff2";
+      };
     };
 
     ignores = [
