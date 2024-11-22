@@ -94,7 +94,6 @@ in {
     lazygit
     less
     lesspipe
-    libtool
     lua
     luajitPackages.luarocks
     luajitPackages.tl
