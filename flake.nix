@@ -40,6 +40,7 @@
           ./home.nix
           ./modules/aarch64-darwin/files.nix
           ./modules/aarch64-darwin/packages.nix
+          ./modules/aarch64-darwin/launchd.nix
           ./modules/files.nix
           ./modules/git.nix
           ./modules/packages.nix
@@ -68,6 +69,7 @@
           ./home.nix
           ./modules/aarch64-darwin/files.nix
           ./modules/aarch64-darwin/packages.nix
+          ./modules/aarch64-darwin/launchd.nix
           ./modules/files.nix
           ./modules/git.nix
           ./modules/packages.nix

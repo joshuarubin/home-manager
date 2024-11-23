@@ -107,6 +107,7 @@ in {
     nodePackages.prettier
     nodejs_22
     nssTools
+    ollama
     openssl
     opentofu
     pass
