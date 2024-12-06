@@ -4,7 +4,7 @@
   ]);
 in {
   home.packages = with pkgs; [
-    _1password
+    _1password-cli
     act
     aider-chat
     alejandra
@@ -88,6 +88,7 @@ in {
     julia-bin
     k9s
     kind
+    krew
     kubectl
     kubernetes-helm
     kubeseal
@@ -163,6 +164,7 @@ in {
     sqlfluff
     sshuttle
     statix
+    stern
     stylua
     tanka
     temporal-cli
@@ -171,6 +173,7 @@ in {
     unbound
     unzip
     vale
+    watch
     wdiff
     wezterm
     wget
