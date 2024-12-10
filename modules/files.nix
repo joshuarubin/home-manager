@@ -3,6 +3,7 @@
   lib,
   pkgs,
   system,
+  sysConfig,
   ...
 }: {
   home.file = {
@@ -29,6 +30,7 @@
     ".ignore".source = ../files/ignore;
     ".mdl.rb".source = ../files/mdl.rb;
     ".mdlrc".source = ../files/mdlrc;
+    ".npmrc".text = "prefix=${sysConfig.homeDirectory}/.local/share/npm";
     ".ripgreprc".source = ../files/ripgreprc;
     ".stylelintrc".source = ../files/stylelintrc;
     ".terminfo.wezterm" = {

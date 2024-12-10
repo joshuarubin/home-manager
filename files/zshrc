@@ -3,6 +3,7 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 
 path=(
+  "${HOME}/go/bin"
   "${HOME}/.krew/bin"
   "${HOME}/.local/bin"
   "${HOME}/.yarn/bin"
