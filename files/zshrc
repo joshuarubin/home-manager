@@ -204,9 +204,3 @@ server () {
 diff () {
   command diff --unified "$@" | colordiff --difftype diffu
 }
-
-# this is for the built in neovim term which has no simple way of overriding the
-# TERM variable
-if [ "$TERM" == "xterm-256color" ]; then
-  TERM="wezterm"
-fi

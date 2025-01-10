@@ -42,6 +42,7 @@ in {
     deno
     devbox
     difftastic
+    diffutils
     dig
     direnv
     docker-buildx
@@ -115,6 +116,7 @@ in {
     pkg-config
     podman
     poetry
+    portaudio
     postgresql
     pre-commit
     process-compose
@@ -126,7 +128,6 @@ in {
         black
         boto3
         botocore
-        clickhouse-connect
         flake8
         fonttools
         identify
@@ -135,6 +136,7 @@ in {
         pandas-stubs
         pip
         pipx
+        playwright
         pylatexenc
         pylint
         pytest
@@ -144,6 +146,7 @@ in {
         torchvision-bin
         tqdm
       ]))
+    qmk
     ran
     redis
     ripgrep

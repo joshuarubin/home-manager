@@ -42,6 +42,7 @@
   };
 
   xdg.configFile = {
+    "atuin/config.toml".source = ../files/config/atuin/config.toml;
     "flake8".source = ../files/config/flake8;
     "git/template/hooks/pre-commit".source = ../files/config/git/template/hooks/pre-commit;
     "nixpkgs/config.nix".source = ../files/config/nixpkgs/config.nix;

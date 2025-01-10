@@ -68,5 +68,10 @@ _: {
     gitui = {
       enable = true;
     };
+
+    atuin = {
+      enable = true;
+      enableZshIntegration = true;
+    };
   };
 }
