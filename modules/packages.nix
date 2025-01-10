@@ -17,7 +17,6 @@ in {
     axel
     bash
     bat
-    bazel
     bazel-buildtools
     bazelisk
     bc

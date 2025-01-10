@@ -82,6 +82,7 @@
   home.shellAliases = {
     # nvim # TODO(jawa)
     # tmux # TODO(jawa)
+    bazel = "bazelisk";
     c = "clear";
     cat = "bat";
     cd = "nocorrect cd";
