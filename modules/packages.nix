@@ -85,6 +85,7 @@ in {
     jq
     jsonnet
     jsonnet-bundler
+    jujutsu
     julia-bin
     k9s
     kind
@@ -108,6 +109,7 @@ in {
     nodePackages.prettier
     nodejs_22
     nssTools
+    oapi-codegen
     ollama
     openssl
     opentofu
