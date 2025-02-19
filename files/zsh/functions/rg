@@ -1,0 +1,1 @@
+command rg --json -C 2 "$@" | delta
