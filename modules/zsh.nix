@@ -132,5 +132,6 @@
     top = "htop";
     tree = "ls --tree";
     v = "ls -l";
+    vimdiff = "nvim -d";
   };
 }

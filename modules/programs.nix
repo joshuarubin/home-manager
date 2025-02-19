@@ -9,13 +9,6 @@ _: {
       extraConfig = "set editing-mode vi";
     };
 
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-    };
-
     fzf = {
       enable = true;
       enableZshIntegration = true;
@@ -55,6 +48,9 @@ _: {
       settings = {
         "$schema" = "https://starship.rs/config-schema.json";
 
+        # add_newline = false;
+        # format = "$character";
+        # right_format = "$all";
 
         character = {
           success_symbol = "[λ](bold blue)";
@@ -86,6 +82,8 @@ _: {
         };
 
         golang = {
+          # symbol = "󰟓 ";
+          symbol = " ";
           disabled = true;
         };
 

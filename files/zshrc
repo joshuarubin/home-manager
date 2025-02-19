@@ -4,6 +4,7 @@ fi
 
 for value in \
   "${HOME}/.yarn/bin" \
+  "${HOME}/.local/share/npm/bin" \
   "${HOME}/.local/bin" \
   "${HOME}/.krew/bin" \
   "${HOME}/go/bin"

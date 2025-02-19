@@ -7,6 +7,9 @@
   ...
 }: {
   home.file = {
+    ".local/bin/vi".source = "${pkgs.unstable.neovim}/bin/nvim";
+    ".local/bin/vim".source = "${pkgs.unstable.neovim}/bin/nvim";
+
     ".actrc".source = ../files/actrc;
     ".aws/config".source = ../files/aws/config;
     ".bash_profile".source = ../files/bash_profile;

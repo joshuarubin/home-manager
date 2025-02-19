@@ -103,6 +103,7 @@ in {
     luajitPackages.tl
     mkcert
     mockgen
+    pkgs.unstable.neovim
     neovim-remote
     nmap
     nodePackages.cdk8s-cli
