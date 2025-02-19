@@ -40,6 +40,7 @@ in {
     delve
     deno
     devbox
+    diffedit3
     difftastic
     diffutils
     dig
@@ -94,6 +95,7 @@ in {
     kubernetes-helm
     kubeseal
     lazygit
+    lazyjj
     less
     lesspipe
     lua

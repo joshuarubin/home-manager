@@ -53,14 +53,76 @@ _: {
     starship = {
       enable = true;
       settings = {
-        add_newline = false;
+        "$schema" = "https://starship.rs/config-schema.json";
 
-        format = "$character";
-        right_format = "$all";
 
         character = {
           success_symbol = "[λ](bold blue)";
           error_symbol = "[λ](bold red)";
+        };
+
+        lua = {
+          disabled = true;
+        };
+
+        git_state = {
+          disabled = true;
+        };
+
+        git_commit = {
+          disabled = true;
+        };
+
+        git_metrics = {
+          disabled = true;
+        };
+
+        git_branch = {
+          disabled = true;
+        };
+
+        git_status = {
+          disabled = true;
+        };
+
+        golang = {
+          disabled = true;
+        };
+
+        aws = {
+          disabled = true;
+        };
+
+        nodejs = {
+          disabled = true;
+        };
+
+        custom.jj = {
+          ignore_timeout = true;
+          description = "current jj status";
+          symbol = "";
+          when = true;
+          command = ''
+            jj root > /dev/null && jj log --revisions @ --no-graph --ignore-working-copy --color always --limit 1 --template '
+              separate(" ",
+                "🥋",
+                change_id.shortest(4),
+                bookmarks,
+                "|",
+                concat(
+                  if(conflict, "💥"),
+                  if(divergent, "🚧"),
+                  if(hidden, "👻"),
+                  if(immutable, "🔒"),
+                ),
+                raw_escape_sequence("\x1b[1;32m") ++ if(empty, "(empty)"),
+                raw_escape_sequence("\x1b[1;32m") ++ if(description.first_line(),
+                  description.first_line(),
+                  "(no description set)",
+                ) ++ raw_escape_sequence("\x1b[0m"),
+              )
+            '
+          '';
         };
       };
     };
