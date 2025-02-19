@@ -1,22 +1,20 @@
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+if [[ -z "$NIX_PROFILES" && -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 
-path=(
+for value in \
+  "${HOME}/.yarn/bin" \
+  "${HOME}/.local/bin" \
+  "${HOME}/.krew/bin" \
   "${HOME}/go/bin"
-  "${HOME}/.krew/bin"
-  "${HOME}/.local/bin"
-  "${HOME}/.yarn/bin"
-  $path
-)
+; do
+  if ((! $path[(Ie)$value])); then
+    path=($value $path)
+  fi
+done
 
 # add some bash completions
-
 autoload -U +X bashcompinit && bashcompinit
-
-if [[ $+commands[terraform] ]]; then
-  complete -o nospace -C terraform terraform
-fi
 
 setopt ALWAYS_TO_END          # Move cursor to the end of a completed word
 setopt AUTO_CD
@@ -138,32 +136,15 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 # nicer looking kill completion
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
 
-# -P     Perform prompt expansion
-# -r     Ignore the escape conventions of echo
-# -n     Do not add a newline to the output
-# \e     escape sequence for escape (ESC)
-# \a     escape sequence for bell (BEL)
-# %~     Current working directory
-
-jawa_precmd () {
-  print -Pn "\e]0;%~\a"
-}
-
-jawa_preexec () {
-  print -Pn "\e]0;"
-  print -rn "$1"
-  print -Pn "\a"
-}
-
-add-zsh-hook precmd jawa_precmd
-add-zsh-hook preexec jawa_preexec
-
 . $HOME/.nix-profile/etc/grc.zsh
+
 [[ -r $HOME/.secret ]] && . $HOME/.secret
 
 unset -f ip 2> /dev/null || true
 
-[ -s "$BASE16_SHELL/profile_helper.sh" ] && eval "$("$BASE16_SHELL/profile_helper.sh")"
+if [[ $+commands[terraform] ]]; then
+  complete -o nospace -C terraform terraform
+fi
 
 ls () {
   local args=(--git -g --group-directories-first --icons)
@@ -203,4 +184,8 @@ server () {
 
 diff () {
   command diff --unified "$@" | colordiff --difftype diffu
+}
+
+rg () {
+  command rg --json -C 2 "$@" | delta
 }
