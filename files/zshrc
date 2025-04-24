@@ -7,12 +7,15 @@ for value in \
   "${HOME}/.local/share/npm/bin" \
   "${HOME}/.local/bin" \
   "${HOME}/.krew/bin" \
-  "${HOME}/go/bin"
+  "${HOME}/go/bin" \
+  "${HOME}/.local/share/asdf/shims"
 ; do
   if ((! $path[(Ie)$value])); then
     path=($value $path)
   fi
 done
+
+path=(node_modules/.bin $path)
 
 # add some bash completions
 autoload -U +X bashcompinit && bashcompinit

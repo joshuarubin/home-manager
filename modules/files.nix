@@ -1,4 +1,5 @@
 {
+  config,
   gpgKey,
   lib,
   pkgs,
@@ -11,6 +12,9 @@
     ".local/bin/vim".source = "${pkgs.unstable.neovim}/bin/nvim";
 
     ".actrc".source = ../files/actrc;
+    ".asdf" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${sysConfig.homeDirectory}/.local/share/asdf";
+    };
     ".aws/config".source = ../files/aws/config;
     ".bash_profile".source = ../files/bash_profile;
     ".bashrc".source = ../files/bashrc;
@@ -40,11 +44,13 @@
       source = ../files/wezterm.terminfo;
       onChange = "tic -x -o ~/.terminfo ~/.terminfo.wezterm";
     };
+    ".tool-versions".source = ../files/tool-versions;
     ".zprofile".source = ../files/zprofile;
     ".zsh/functions".source = ../files/zsh/functions;
   };
 
   xdg.configFile = {
+    "asdfrc".source = ../files/asdfrc;
     "atuin/config.toml".source = ../files/config/atuin/config.toml;
     "flake8".source = ../files/config/flake8;
     "git/template/hooks/pre-commit".source = ../files/config/git/template/hooks/pre-commit;

@@ -15,6 +15,7 @@ in {
     automake
     awscli2
     axel
+    backblaze-b2
     bash
     bat
     bazel-buildtools
@@ -34,7 +35,7 @@ in {
     corepack
     cpplint
     ctlptl
-    curl
+    # curl
     deadnix
     delta
     delve
@@ -69,7 +70,7 @@ in {
     go-mockery
     go-tools
     gofumpt
-    golangci-lint
+    pkgs.unstable.golangci-lint
     golint
     gopls
     goreleaser
@@ -86,7 +87,7 @@ in {
     jq
     jsonnet
     jsonnet-bundler
-    jujutsu
+    pkgs.unstable.jujutsu
     julia-bin
     k9s
     kind
@@ -95,7 +96,7 @@ in {
     kubernetes-helm
     kubeseal
     lazygit
-    lazyjj
+    pkgs.unstable.lazyjj
     less
     lesspipe
     lua

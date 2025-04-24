@@ -25,12 +25,14 @@
     };
 
     initExtraFirst = ''
+      export ASDF_DATA_DIR=$HOME/.local/share/asdf
       export NIX_PATH=$HOME/.nix-defexpr/channels
       export GPG_TTY="$(tty)"; # put this here and not in sessionVariables to ensure it gets reexecuted for all interactive shells
       export FPATH
 
       fpath=(
         "$HOME/.zsh/functions"
+        "$HOME/.local/share/asdf/completions"
         $fpath
       )
 
@@ -59,8 +61,8 @@
 
   # NOTE: these are exported
   home.sessionVariables = {
+    # NOTE change $PATH in zshrc
     # MAKEFLAGS = "-j <numcpu>"; # TODO(jawa)
-    PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
     EDITOR = "nvim";
     GOPROXY = "https://proxy.golang.org,direct";
     GOSUMDB = "sum.golang.org";
@@ -70,7 +72,7 @@
     LESSOPEN = "| lesspipe.sh %s";
     LS_COLORS = "di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:";
     PAGER = "less";
-    # change $PATH in zshrc
+    PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
     RIPGREP_CONFIG_PATH = "$HOME/.ripgreprc";
     SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
     USE_GKE_GCLOUD_AUTH_PLUGIN = "True";
