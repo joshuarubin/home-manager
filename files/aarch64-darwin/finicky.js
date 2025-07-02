@@ -3,6 +3,10 @@ const browsers = {
     name: "Arc",
     openInBackground: false,
   },
+  zen: {
+    name: "Zen Browser",
+    openInBackground: false,
+  },
   finder: {
     name: "Finder",
     openInBackground: false,
@@ -14,7 +18,7 @@ const browsers = {
 };
 
 module.exports = {
-  defaultBrowser: browsers.arc,
+  defaultBrowser: browsers.zen,
   options: {
     hideIcon: false,
   },

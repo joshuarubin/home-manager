@@ -78,6 +78,7 @@
     USE_GKE_GCLOUD_AUTH_PLUGIN = "True";
     VISUAL = "nvim";
     WINEARCH = "win32";
+    YAMLFIX_SECTION_WHITELINES = "1";
     XZ_DEFAULTS = "--threads=0";
   };
 

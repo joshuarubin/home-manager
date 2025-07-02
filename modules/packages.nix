@@ -6,7 +6,7 @@ in {
   home.packages = with pkgs; [
     _1password-cli
     act
-    aider-chat
+    pkgs.unstable.aider-chat
     alejandra
     aria2
     asciinema
