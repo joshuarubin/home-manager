@@ -1,0 +1,40 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "Joshua Rubin"
+email = "joshua@poolside.ai"
+
+[ui]
+editor = ["nvim", "--cmd", "let g:flatten_wait=1"]
+default-command = "status"
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
+pager = "delta"
+conflict-marker-style = "git"
+diff-formatter = ":git"
+
+[signing]
+behavior = "own"
+backend = "gpg"
+key = "71AA74EA6C4CA520"
+
+[aliases]
+d = ["diff", "--ignore-all-space"]
+di = ["diff", "--ignore-all-space"]
+l = ["log"]
+# `jj lb` shows commits on the working-copy commit's (anonymous) bookmark
+# compared to the `main` bookmark
+lb = ["log", "-r", "(main..@):: | (main..@)-"]
+
+[merge-tools.diffconflicts]
+program = "nvim"
+merge-args = [
+  "-c",
+  "let g:jj_diffconflicts_marker_length=$marker_length",
+  "-c",
+  "JJDiffConflicts!",
+  "$output",
+  "$base",
+  "$left",
+  "$right",
+]
+merge-tool-edits-conflict-markers = true

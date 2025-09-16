@@ -127,7 +127,7 @@ in {
     process-compose
     prometheus
     protobuf
-    pulumi-bin
+    # pulumi-bin
     (python3.withPackages (ps:
       with ps; [
         black

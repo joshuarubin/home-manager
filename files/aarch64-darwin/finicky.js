@@ -3,12 +3,16 @@ const browsers = {
     name: "Arc",
     openInBackground: false,
   },
-  zen: {
-    name: "Zen Browser",
+  edge: {
+    name: "Microsoft Edge",
     openInBackground: false,
   },
   finder: {
     name: "Finder",
+    openInBackground: false,
+  },
+  zen: {
+    name: "Zen Browser",
     openInBackground: false,
   },
   zoom: {
@@ -17,8 +21,8 @@ const browsers = {
   },
 };
 
-module.exports = {
-  defaultBrowser: browsers.zen,
+export default {
+  defaultBrowser: browsers.edge,
   options: {
     hideIcon: false,
   },
@@ -83,20 +87,20 @@ module.exports = {
         };
       },
     },
-    {
-      // Append `opener_=slack` to all urls opened from Slack so Arc Air Traffic
-      // Control can match on them
-      match: ({ opener }) => opener.bundleId === "com.tinyspeck.slackmacgap",
-      url: ({ url }) => {
-        const search = url.search
-          .split("&")
-          .filter((r) => r !== "")
-          .concat(["opener_=slack"])
-          .join("&");
-
-        return { ...url, search };
-      },
-    },
+    // {
+    //   // Append `opener_=slack` to all urls opened from Slack so Arc Air Traffic
+    //   // Control can match on them
+    //   match: ({ opener }) => opener.bundleId === "com.tinyspeck.slackmacgap",
+    //   url: ({ url }) => {
+    //     const search = url.search
+    //       .split("&")
+    //       .filter((r) => r !== "")
+    //       .concat(["opener_=slack"])
+    //       .join("&");
+    //
+    //     return { ...url, search };
+    //   },
+    // },
     {
       match: ({ url }) => url.protocol === "s3",
       url: ({ urlString, url }) => {
