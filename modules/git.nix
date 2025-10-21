@@ -160,6 +160,7 @@
       ".tags"
       ".zfs/"
       "/CVS/*"
+      "AGENTS.md"
       "CLAUDE.md"
       "Desktop.ini"
       "GPATH"

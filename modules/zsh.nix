@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -24,22 +28,23 @@
       enable = true;
     };
 
-    initExtraFirst = ''
-      export ASDF_DATA_DIR=$HOME/.local/share/asdf
-      export NIX_PATH=$HOME/.nix-defexpr/channels
-      export GPG_TTY="$(tty)"; # put this here and not in sessionVariables to ensure it gets reexecuted for all interactive shells
-      export FPATH
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        export ASDF_DATA_DIR=$HOME/.local/share/asdf
+        export NIX_PATH=$HOME/.nix-defexpr/channels
+        export GPG_TTY="$(tty)"; # put this here and not in sessionVariables to ensure it gets reexecuted for all interactive shells
+        export FPATH
 
-      fpath=(
-        "$HOME/.zsh/functions"
-        "$HOME/.local/share/asdf/completions"
-        $fpath
-      )
+        fpath=(
+          "$HOME/.zsh/functions"
+          "$HOME/.local/share/asdf/completions"
+          $fpath
+        )
 
-      autoload -Uz $fpath[1]/*(.:t)
-    '';
-
-    initExtra = builtins.readFile ../files/zshrc;
+        autoload -Uz $fpath[1]/*(.:t)
+      '')
+      (builtins.readFile ../files/zshrc)
+    ];
 
     # TODO(jawa) review completion
 

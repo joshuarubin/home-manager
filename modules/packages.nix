@@ -8,6 +8,7 @@ in {
     act
     pkgs.unstable.aider-chat
     alejandra
+    amp-cli
     aria2
     asciinema
     asdf-vm
@@ -35,7 +36,7 @@ in {
     corepack
     cpplint
     ctlptl
-    # curl
+    curl
     deadnix
     delta
     delve
@@ -108,7 +109,7 @@ in {
     neovim-remote
     nmap
     nodePackages.cdk8s-cli
-    nodePackages.cdktf-cli
+    # nodePackages.cdktf-cli ## doesn't build
     nodePackages.eslint
     nodePackages.prettier
     nodejs_22
@@ -125,7 +126,7 @@ in {
     postgresql
     pre-commit
     process-compose
-    prometheus
+    # prometheus ## conflicts with go-migrate
     protobuf
     # pulumi-bin
     (python3.withPackages (ps:
