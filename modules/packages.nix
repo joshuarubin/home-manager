@@ -8,7 +8,7 @@ in {
     act
     pkgs.unstable.aider-chat
     alejandra
-    amp-cli
+    pkgs.unstable.amp-cli
     aria2
     asciinema
     asdf-vm
@@ -36,6 +36,7 @@ in {
     corepack
     cpplint
     ctlptl
+    cue
     curl
     deadnix
     delta
