@@ -1128,6 +1128,9 @@ keybind = super+alt+shift+j=write_scrollback_file:open
 keybind = super+shift+j=write_scrollback_file:paste
 keybind = super+k=clear_screen
 
+# shift-enter sends a carriage return without a newline
+keybind = shift+enter=text:\x1b\r
+
 # copy/paste
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard

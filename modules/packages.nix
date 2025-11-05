@@ -106,6 +106,7 @@ in {
     luajitPackages.tl
     mkcert
     mockgen
+    mupdf
     pkgs.unstable.neovim
     neovim-remote
     nmap
@@ -146,6 +147,8 @@ in {
         playwright
         pylatexenc
         pylint
+        pymupdf
+        pymupdf-fonts
         pytest
         python-dotenv
         torch-bin
