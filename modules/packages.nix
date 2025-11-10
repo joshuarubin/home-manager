@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{pkgs, unstable, ...}: let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
     gke-gcloud-auth-plugin
   ]);
@@ -6,9 +6,9 @@ in {
   home.packages = with pkgs; [
     _1password-cli
     act
-    pkgs.unstable.aider-chat
+    unstable.aider-chat
     alejandra
-    pkgs.unstable.amp-cli
+    unstable.amp-cli
     aria2
     asciinema
     asdf-vm
@@ -72,7 +72,7 @@ in {
     go-mockery
     go-tools
     gofumpt
-    pkgs.unstable.golangci-lint
+    unstable.golangci-lint
     golint
     gopls
     goreleaser
@@ -89,7 +89,7 @@ in {
     jq
     jsonnet
     jsonnet-bundler
-    pkgs.unstable.jujutsu
+    unstable.jujutsu
     julia-bin
     k9s
     kind
@@ -98,7 +98,7 @@ in {
     kubernetes-helm
     kubeseal
     lazygit
-    pkgs.unstable.lazyjj
+    unstable.lazyjj
     less
     lesspipe
     lua
@@ -107,7 +107,7 @@ in {
     mkcert
     mockgen
     mupdf
-    pkgs.unstable.neovim
+    unstable.neovim
     neovim-remote
     nmap
     nodePackages.cdk8s-cli

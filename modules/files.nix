@@ -5,11 +5,12 @@
   pkgs,
   system,
   sysConfig,
+  unstable,
   ...
 }: {
   home.file = {
-    ".local/bin/vi".source = "${pkgs.unstable.neovim}/bin/nvim";
-    ".local/bin/vim".source = "${pkgs.unstable.neovim}/bin/nvim";
+    ".local/bin/vi".source = "${unstable.neovim}/bin/nvim";
+    ".local/bin/vim".source = "${unstable.neovim}/bin/nvim";
 
     ".actrc".source = ../files/actrc;
     ".asdf" = {

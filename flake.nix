@@ -13,6 +13,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
@@ -24,6 +25,13 @@
     ];
 
     forAllSystems = nixpkgs.lib.genAttrs systems;
+
+    # Import unstable with config for unfree packages
+    # This is slightly slower than legacyPackages but necessary for unfree support
+    mkUnstableWithConfig = system: import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
@@ -51,6 +59,7 @@
 
         extraSpecialArgs = {
           inherit inputs outputs;
+          unstable = mkUnstableWithConfig "aarch64-darwin";
           sysConfig = {
             username = "jrubin";
             homeDirectory = "/Users/jrubin";
@@ -80,6 +89,7 @@
 
         extraSpecialArgs = {
           inherit inputs outputs;
+          unstable = mkUnstableWithConfig "aarch64-darwin";
           sysConfig = {
             username = "jrubin";
             homeDirectory = "/Users/jrubin";

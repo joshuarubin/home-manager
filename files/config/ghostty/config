@@ -794,6 +794,11 @@ unfocused-split-opacity = 0.7
 # This will default to the background color.
 # unfocused-split-fill =
 
+# The color of the divider between splits. This can be specified as either
+# hex (#RRGGBB or RRGGBB) or a named X11 color. If not set, Ghostty will
+# automatically determine the color based on your terminal background color.
+split-divider-color = #808080
+
 # The command to run, usually a shell. If this is not an absolute path, it'll
 # be looked up in the `PATH`. If this is not set, a default will be looked up
 # from your system. The rules for the default lookup are:
