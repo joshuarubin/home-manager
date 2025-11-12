@@ -26,11 +26,14 @@
 
     forAllSystems = nixpkgs.lib.genAttrs systems;
 
-    # Import unstable with config for unfree packages
+    # Import unstable with config for specific unfree packages
     # This is slightly slower than legacyPackages but necessary for unfree support
     mkUnstableWithConfig = system: import nixpkgs-unstable {
       inherit system;
-      config.allowUnfree = true;
+      config.allowUnfreePredicate = pkg:
+        builtins.elem (nixpkgs.lib.getName pkg) [
+          "amp-cli"
+        ];
     };
   in {
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
