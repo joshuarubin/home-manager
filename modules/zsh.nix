@@ -77,6 +77,76 @@
 
           nix-collect-garbage -d
         }
+
+        # Jujutsu wrapper with pre-commit hook integration
+        jj() {
+          # Helper to run git pre-commit hook if it exists
+          local run_precommit_hook() {
+            local git_dir
+            git_dir=$(command jj root 2>/dev/null)/.git
+            local hook="$git_dir/hooks/pre-commit"
+
+            if [[ -x "$hook" ]]; then
+              echo "Running pre-commit hook..."
+              if ! "$hook"; then
+                echo "Pre-commit hook failed. Fix issues before proceeding."
+                return 1
+              fi
+            fi
+            return 0
+          }
+
+          # Helper to check if working copy has changes
+          local has_working_copy_changes() {
+            command jj diff --summary -r @ 2>/dev/null | grep -q .
+          }
+
+          # Find the actual subcommand (skip all flags)
+          local subcommand=""
+          local git_subcommand=""
+
+          for arg in "$@"; do
+            # Skip anything starting with -
+            if [[ "$arg" =~ ^- ]]; then
+              continue
+            fi
+
+            # Found first non-flag argument
+            if [[ -z "$subcommand" ]]; then
+              subcommand="$arg"
+            elif [[ "$subcommand" == "git" && -z "$git_subcommand" ]]; then
+              # For "jj git push/fetch/etc"
+              git_subcommand="$arg"
+              break
+            else
+              break
+            fi
+          done
+
+          # Commands that should trigger pre-commit on working copy
+          # Trigger on: changing current rev, remote changes, or changing ancestor revs
+          case "$subcommand" in
+            abandon|commit|edit|new|rebase|split|squash)
+              if has_working_copy_changes; then
+                run_precommit_hook || return 1
+              fi
+              ;;
+            git)
+              if [[ "$git_subcommand" == "push" ]]; then
+                # Check if there are any commits to push
+                local has_changes
+                has_changes=$(command jj log -r 'remote_bookmarks()..@' --limit 1 --no-graph -T 'change_id' 2>/dev/null)
+
+                if [[ -n "$has_changes" ]] && has_working_copy_changes; then
+                  run_precommit_hook || return 1
+                fi
+              fi
+              ;;
+          esac
+
+          # Execute the actual jj command
+          command jj "$@"
+        }
       '')
       (builtins.readFile ../files/zshrc)
     ];
