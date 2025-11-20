@@ -1,4 +1,8 @@
-{pkgs, unstable, ...}: let
+{
+  pkgs,
+  unstable,
+  ...
+}: let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
     gke-gcloud-auth-plugin
   ]);
@@ -116,7 +120,7 @@ in {
     nodePackages.prettier
     nodejs_22
     nssTools
-    oapi-codegen
+    # oapi-codegen
     ollama
     openssl
     opentofu

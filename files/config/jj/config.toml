@@ -21,11 +21,11 @@ key = "71AA74EA6C4CA520"
 d = ["diff", "--ignore-all-space"]
 di = ["diff", "--ignore-all-space"]
 l = ["log"]
-# `jj lb` shows commits on the working-copy commit's (anonymous) bookmark
-# compared to the `main` bookmark
+# `jj lb` shows commits between main and @ (working copy), including their
+# descendants and parents for context
 lb = ["log", "-r", "(main..@):: | (main..@)-"]
+# `jj la` shows all commits in the repository
 la = ["log", "-r", "all()"]
-ld = ["log", "-r", "@ | ancestors(immutable_heads().., 2) | trunk()"]
 
 [merge-tools.diffconflicts]
 program = "nvim"
@@ -40,14 +40,3 @@ merge-args = [
   "$right",
 ]
 merge-tool-edits-conflict-markers = true
-
-[revsets]
-log = "@ | bases | branches | curbranch::@ | @::nextbranch | downstream(@, branchesandheads)"
-
-[revset-aliases]
-'bases' = 'main'
-'downstream(x,y)' = '(x::y) & y'
-'branches' = 'downstream(main, bookmarks()) & mine()'
-'branchesandheads' = 'branches | (heads(main::) & mine())'
-'curbranch' = 'latest(branches::@- & branches)'
-'nextbranch' = 'roots(@:: & branchesandheads)'
