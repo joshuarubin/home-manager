@@ -58,7 +58,7 @@
       source = ../files/config/ghostty;
       recursive = true;
     };
-    "git/template/hooks/pre-commit".source = ../files/config/git/template/hooks/pre-commit;
+    "git/pre-commit-script".source = ../files/config/git/template/hooks/pre-commit;
     "jj/config.toml".source = ../files/config/jj/config.toml;
     "nixpkgs/config.nix".source = ../files/config/nixpkgs/config.nix;
     "pylintrc".source = ../files/config/pylintrc;
@@ -73,4 +73,16 @@
     };
     "yamllint/config".source = ../files/config/yamllint/config;
   };
+
+  home.activation.gitPreCommitHook = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    run mkdir -p ~/.config/git/template/hooks
+    run rm -f ~/.config/git/template/hooks/pre-commit
+    if [[ ! -v DRY_RUN ]]; then
+      cat > ~/.config/git/template/hooks/pre-commit << 'EOF'
+#!/usr/bin/env bash
+exec ~/.config/git/pre-commit-script "$@"
+EOF
+      chmod +x ~/.config/git/template/hooks/pre-commit
+    fi
+  '';
 }
