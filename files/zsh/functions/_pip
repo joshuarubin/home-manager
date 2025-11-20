@@ -14,4 +14,3 @@ else
   compdef __pip -P 'pip[0-9.]#'
 fi
 # pip zsh completion end
-
