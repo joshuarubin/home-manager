@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   launchd.agents = {
     ollama-serve = {
-      enable = false;  # temporarily disabled - ollama build fails in 25.11
+      enable = false; # temporarily disabled - ollama build fails in 25.11
       config = {
         ProgramArguments = ["${pkgs.ollama}/bin/ollama" "serve"];
         KeepAlive = true;

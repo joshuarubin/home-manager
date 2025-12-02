@@ -47,83 +47,61 @@
         config.allowUnfreePredicate = pkg:
           builtins.elem (nixpkgs.lib.getName pkg) allowedUnfreePackages;
       };
-  in {
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
+    # Helper function to create Darwin home configurations
+    mkDarwinHome = {
+      username,
+      hostname,
+      gpgKey,
+      stateVersion,
+    }: let
+      system = "aarch64-darwin";
+      nurpkgs = nur.legacyPackages.${system};
+    in
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+
+        modules = [
+          ./home.nix
+          ./modules/${system}/files.nix
+          ./modules/${system}/packages.nix
+          ./modules/${system}/launchd.nix
+          ./modules/files.nix
+          ./modules/git.nix
+          ./modules/packages.nix
+          ./modules/programs.nix
+          ./modules/zsh.nix
+          nurpkgs.repos.charmbracelet.modules.homeManager.crush
+        ];
+
+        extraSpecialArgs = {
+          inherit inputs outputs nur allowedUnfreePackages hostname gpgKey;
+          unstable = mkUnstableWithConfig system;
+          sysConfig = {
+            inherit username stateVersion;
+            homeDirectory = "/Users/${username}";
+          };
+          genericLinux = false;
+        };
+      };
+  in {
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     overlays = import ./overlays {inherit inputs;};
 
-    homeManagerModules = import ./modules/home-manager;
-
     homeConfigurations = {
-      "jrubin@vermithor" = let
-        system = "aarch64-darwin";
-        nurpkgs = nur.legacyPackages.${system};
-      in
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
-
-          modules = [
-            ./home.nix
-            ./modules/${system}/files.nix
-            ./modules/${system}/packages.nix
-            ./modules/${system}/launchd.nix
-            ./modules/files.nix
-            ./modules/git.nix
-            ./modules/packages.nix
-            ./modules/programs.nix
-            ./modules/zsh.nix
-            nurpkgs.repos.charmbracelet.modules.homeManager.crush
-          ];
-
-          extraSpecialArgs = {
-            inherit inputs outputs nur allowedUnfreePackages;
-            unstable = mkUnstableWithConfig system;
-            sysConfig = {
-              username = "jrubin";
-              homeDirectory = "/Users/jrubin";
-              stateVersion = "23.05";
-            };
-            genericLinux = false;
-            hostname = "vermithor";
-            gpgKey = "71AA74EA6C4CA520";
-          };
-        };
-
-      "jrubin@tessarion" = let
-        system = "aarch64-darwin";
-        nurpkgs = nur.legacyPackages.${system};
-      in
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
-
-          modules = [
-            ./home.nix
-            ./modules/${system}/files.nix
-            ./modules/${system}/packages.nix
-            ./modules/${system}/launchd.nix
-            ./modules/files.nix
-            ./modules/git.nix
-            ./modules/packages.nix
-            ./modules/programs.nix
-            ./modules/zsh.nix
-            nurpkgs.repos.charmbracelet.modules.homeManager.crush
-          ];
-
-          extraSpecialArgs = {
-            inherit inputs outputs nur allowedUnfreePackages;
-            unstable = mkUnstableWithConfig system;
-            sysConfig = {
-              username = "jrubin";
-              homeDirectory = "/Users/jrubin";
-              stateVersion = "23.05";
-            };
-            genericLinux = false;
-            hostname = "tessarion";
-            gpgKey = "71AA74EA6C4CA520";
-          };
-        };
+      "jrubin@vermithor" = mkDarwinHome {
+        username = "jrubin";
+        hostname = "vermithor";
+        gpgKey = "71AA74EA6C4CA520";
+        stateVersion = "23.05";
+      };
+      "jrubin@tessarion" = mkDarwinHome {
+        username = "jrubin";
+        hostname = "tessarion";
+        gpgKey = "71AA74EA6C4CA520";
+        stateVersion = "23.05";
+      };
     };
   };
 }

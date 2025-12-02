@@ -1,14 +1,7 @@
-{inputs, ...}: {
-  additions = final: _prev: import ../pkgs final.pkgs;
-
-  modifications = _final: _prev: {
-    # openssl = prev.openssl.override {withZlib = true;};
+{...}: {
+  additions = _final: _prev: {
   };
 
-  unstable-packages = final: _prev: {
-    unstable = import inputs.nixpkgs-unstable {
-      inherit (final) system config;
-      # config.allowUnfree = true;
-    };
+  modifications = _final: _prev: {
   };
 }

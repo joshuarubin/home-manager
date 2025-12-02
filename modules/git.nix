@@ -219,6 +219,4 @@
   };
 
   xdg.configFile."git/message".source = ../files/config/git/message;
-
-  home.packages = [pkgs.git];
 }

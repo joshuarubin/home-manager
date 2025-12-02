@@ -75,14 +75,14 @@
   };
 
   home.activation.gitPreCommitHook = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    run mkdir -p ~/.config/git/template/hooks
-    run rm -f ~/.config/git/template/hooks/pre-commit
-    if [[ ! -v DRY_RUN ]]; then
-      cat > ~/.config/git/template/hooks/pre-commit << 'EOF'
-#!/usr/bin/env bash
-exec ~/.config/git/pre-commit-script "$@"
-EOF
-      chmod +x ~/.config/git/template/hooks/pre-commit
-    fi
+        run mkdir -p ~/.config/git/template/hooks
+        run rm -f ~/.config/git/template/hooks/pre-commit
+        if [[ ! -v DRY_RUN ]]; then
+          cat > ~/.config/git/template/hooks/pre-commit << 'EOF'
+    #!/usr/bin/env bash
+    exec ~/.config/git/pre-commit-script "$@"
+    EOF
+          chmod +x ~/.config/git/template/hooks/pre-commit
+        fi
   '';
 }

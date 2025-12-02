@@ -1243,13 +1243,13 @@ keybind = super+shift+enter=toggle_split_zoom
 
 # selection
 keybind = super+a=select_all
-keybind = shift+up=adjust_selection:up
+# keybind = shift+up=adjust_selection:up
 keybind = shift+left=adjust_selection:left
 keybind = shift+page_up=adjust_selection:page_up
 keybind = shift+end=adjust_selection:end
 keybind = shift+right=adjust_selection:right
 keybind = shift+page_down=adjust_selection:page_down
-keybind = shift+down=adjust_selection:down
+# keybind = shift+down=adjust_selection:down
 keybind = shift+home=adjust_selection:home
 
 # vim resize
