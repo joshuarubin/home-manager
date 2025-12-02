@@ -27,12 +27,12 @@ in {
     bazelisk
     bc
     bfg-repo-cleaner
-    bind
+    # bind  # temporarily disabled - conflicts with dig package in 25.11
     btop
     buf
     c-ares
     cargo
-    clickhouse
+    # clickhouse  # temporarily disabled - no binary cache in 25.11, builds from source
     clippy
     cmake
     colordiff
@@ -56,7 +56,7 @@ in {
     docker-compose
     docker-credential-helpers
     docutils
-    du-dust
+    dust
     duf
     eternal-terminal
     eza
@@ -121,7 +121,8 @@ in {
     nodejs_22
     nssTools
     # oapi-codegen
-    ollama
+    # ollama  # temporarily disabled - build fails in 25.11
+    opencode
     openssl
     opentofu
     pass
@@ -151,8 +152,8 @@ in {
         playwright
         pylatexenc
         pylint
-        pymupdf
-        pymupdf-fonts
+        # pymupdf  # temporarily disabled - build fails in 25.11
+        # pymupdf-fonts
         pytest
         python-dotenv
         torch-bin

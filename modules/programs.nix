@@ -38,9 +38,9 @@ _: {
 
     go = {
       enable = true;
-      goPrivate = [
-        "github.com/poolsideai/*"
-      ];
+      env = {
+        GOPRIVATE = "github.com/poolsideai/*";
+      };
     };
 
     starship = {
@@ -125,9 +125,9 @@ _: {
       };
     };
 
-    gitui = {
-      enable = true;
-    };
+    # gitui = {
+    #   enable = true;
+    # };  # temporarily disabled - compilation errors on aarch64-darwin in 25.11
 
     atuin = {
       enable = true;

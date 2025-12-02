@@ -5,52 +5,26 @@
 }: {
   programs.git = {
     enable = true;
-    aliases = {
-      sts = "status";
-      st = "status";
-      ci = "commit -s";
-      am = "am -s";
-      di = "diff";
-      dis = "diff";
-      co = "checkout";
-      br = "branch";
-      lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-      patch = "--no-pager diff --no-color";
-    };
 
-    delta = {
-      enable = true;
-
-      options = {
-        side-by-side = true;
-        features = "decorations";
-        syntax-theme = "gruvbox-dark";
-        navigate = true;
-
-        decorations = {
-          commit-style = "bold yellow";
-          file-style = "bright-yellow";
-          hunk-header-style = "bold syntax";
-          minus-style = "syntax '#340001'";
-          minus-non-emph-style = "bold red";
-          minus-emph-style = "bold red 52";
-          minus-empty-line-marker-style = "normal '#3f0001'";
-          zero-style = "normal";
-          plus-style = "syntax '#012800'";
-          plus-non-emph-style = "bold green";
-          plus-emph-style = "bold green 22";
-          plus-empty-line-marker-style = "normal '#002800'";
-          whitespace-error-style = "reverse purple";
-          line-numbers-minus-style = "88";
-          line-numbers-zero-style = "'#444444'";
-          line-numbers-plus-style = "28";
-          line-numbers-left-style = "blue";
-          line-numbers-right-style = "blue";
-        };
+    settings = {
+      alias = {
+        sts = "status";
+        st = "status";
+        ci = "commit -s";
+        am = "am -s";
+        di = "diff";
+        dis = "diff";
+        co = "checkout";
+        br = "branch";
+        lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+        patch = "--no-pager diff --no-color";
       };
-    };
 
-    extraConfig = {
+      user = {
+        email = "me@jawa.dev";
+        name = "Joshua Rubin";
+      };
+
       apply = {
         whitespace = "nowarn";
       };
@@ -209,9 +183,39 @@
       signByDefault = true;
       key = gpgKey;
     };
+  };
 
-    userEmail = "me@jawa.dev";
-    userName = "Joshua Rubin";
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+
+    options = {
+      side-by-side = true;
+      features = "decorations";
+      syntax-theme = "gruvbox-dark";
+      navigate = true;
+
+      decorations = {
+        commit-style = "bold yellow";
+        file-style = "bright-yellow";
+        hunk-header-style = "bold syntax";
+        minus-style = "syntax '#340001'";
+        minus-non-emph-style = "bold red";
+        minus-emph-style = "bold red 52";
+        minus-empty-line-marker-style = "normal '#3f0001'";
+        zero-style = "normal";
+        plus-style = "syntax '#012800'";
+        plus-non-emph-style = "bold green";
+        plus-emph-style = "bold green 22";
+        plus-empty-line-marker-style = "normal '#002800'";
+        whitespace-error-style = "reverse purple";
+        line-numbers-minus-style = "88";
+        line-numbers-zero-style = "'#444444'";
+        line-numbers-plus-style = "28";
+        line-numbers-left-style = "blue";
+        line-numbers-right-style = "blue";
+      };
+    };
   };
 
   xdg.configFile."git/message".source = ../files/config/git/message;

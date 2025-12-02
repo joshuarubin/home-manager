@@ -3,7 +3,7 @@
     colima
     coreutils-prefixed
     docker-client
-    lima-bin
+    lima
     pngpaste
     pinentry_mac
   ];
