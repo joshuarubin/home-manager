@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur = {
+      url = "github:nix-community/nur";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -15,6 +19,7 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    nur,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -26,15 +31,22 @@
 
     forAllSystems = nixpkgs.lib.genAttrs systems;
 
+    # Centralized list of allowed unfree packages
+    allowedUnfreePackages = [
+      "1password-cli"
+      "amp-cli"
+      "crush"
+      "torch"
+    ];
+
     # Import unstable with config for specific unfree packages
     # This is slightly slower than legacyPackages but necessary for unfree support
-    mkUnstableWithConfig = system: import nixpkgs-unstable {
-      inherit system;
-      config.allowUnfreePredicate = pkg:
-        builtins.elem (nixpkgs.lib.getName pkg) [
-          "amp-cli"
-        ];
-    };
+    mkUnstableWithConfig = system:
+      import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfreePredicate = pkg:
+          builtins.elem (nixpkgs.lib.getName pkg) allowedUnfreePackages;
+      };
   in {
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
@@ -45,65 +57,73 @@
     homeManagerModules = import ./modules/home-manager;
 
     homeConfigurations = {
-      "jrubin@vermithor" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      "jrubin@vermithor" = let
+        system = "aarch64-darwin";
+        nurpkgs = nur.legacyPackages.${system};
+      in
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
 
-        modules = [
-          ./home.nix
-          ./modules/aarch64-darwin/files.nix
-          ./modules/aarch64-darwin/packages.nix
-          ./modules/aarch64-darwin/launchd.nix
-          ./modules/files.nix
-          ./modules/git.nix
-          ./modules/packages.nix
-          ./modules/programs.nix
-          ./modules/zsh.nix
-        ];
+          modules = [
+            ./home.nix
+            ./modules/${system}/files.nix
+            ./modules/${system}/packages.nix
+            ./modules/${system}/launchd.nix
+            ./modules/files.nix
+            ./modules/git.nix
+            ./modules/packages.nix
+            ./modules/programs.nix
+            ./modules/zsh.nix
+            nurpkgs.repos.charmbracelet.modules.homeManager.crush
+          ];
 
-        extraSpecialArgs = {
-          inherit inputs outputs;
-          unstable = mkUnstableWithConfig "aarch64-darwin";
-          sysConfig = {
-            username = "jrubin";
-            homeDirectory = "/Users/jrubin";
-            stateVersion = "23.05";
+          extraSpecialArgs = {
+            inherit inputs outputs nur allowedUnfreePackages;
+            unstable = mkUnstableWithConfig system;
+            sysConfig = {
+              username = "jrubin";
+              homeDirectory = "/Users/jrubin";
+              stateVersion = "23.05";
+            };
+            genericLinux = false;
+            hostname = "vermithor";
+            gpgKey = "71AA74EA6C4CA520";
           };
-          genericLinux = false;
-          hostname = "vermithor";
-          system = "aarch64-darwin";
-          gpgKey = "71AA74EA6C4CA520";
         };
-      };
 
-      "jrubin@tessarion" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      "jrubin@tessarion" = let
+        system = "aarch64-darwin";
+        nurpkgs = nur.legacyPackages.${system};
+      in
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
 
-        modules = [
-          ./home.nix
-          ./modules/aarch64-darwin/files.nix
-          ./modules/aarch64-darwin/packages.nix
-          ./modules/aarch64-darwin/launchd.nix
-          ./modules/files.nix
-          ./modules/git.nix
-          ./modules/packages.nix
-          ./modules/programs.nix
-          ./modules/zsh.nix
-        ];
+          modules = [
+            ./home.nix
+            ./modules/${system}/files.nix
+            ./modules/${system}/packages.nix
+            ./modules/${system}/launchd.nix
+            ./modules/files.nix
+            ./modules/git.nix
+            ./modules/packages.nix
+            ./modules/programs.nix
+            ./modules/zsh.nix
+            nurpkgs.repos.charmbracelet.modules.homeManager.crush
+          ];
 
-        extraSpecialArgs = {
-          inherit inputs outputs;
-          unstable = mkUnstableWithConfig "aarch64-darwin";
-          sysConfig = {
-            username = "jrubin";
-            homeDirectory = "/Users/jrubin";
-            stateVersion = "23.05";
+          extraSpecialArgs = {
+            inherit inputs outputs nur allowedUnfreePackages;
+            unstable = mkUnstableWithConfig system;
+            sysConfig = {
+              username = "jrubin";
+              homeDirectory = "/Users/jrubin";
+              stateVersion = "23.05";
+            };
+            genericLinux = false;
+            hostname = "tessarion";
+            gpgKey = "71AA74EA6C4CA520";
           };
-          genericLinux = false;
-          hostname = "tessarion";
-          system = "aarch64-darwin";
-          gpgKey = "71AA74EA6C4CA520";
         };
-      };
     };
   };
 }

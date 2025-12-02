@@ -3,7 +3,6 @@
   gpgKey,
   lib,
   pkgs,
-  system,
   sysConfig,
   unstable,
   ...
@@ -22,7 +21,7 @@
     ".ctags".source = ../files/ctags;
     ".editrc".source = ../files/editrc;
     ".gnupg/dirmngr.conf".source = ../files/gnupg/dirmngr.conf;
-    ".gnupg/gpg-agent.conf".text = lib.optionalString (system == "aarch64-darwin") "pinentry-program ${pkgs.pinentry_mac}/bin/pinentry-mac\n" + (builtins.readFile ../files/gnupg/gpg-agent.conf);
+    ".gnupg/gpg-agent.conf".text = lib.optionalString (pkgs.stdenv.isDarwin && pkgs.stdenv.isAarch64) "pinentry-program ${pkgs.pinentry_mac}/bin/pinentry-mac\n" + (builtins.readFile ../files/gnupg/gpg-agent.conf);
     ".gnupg/gpg.conf".text =
       ''
         default-key ${gpgKey}
@@ -61,6 +60,7 @@
     "git/pre-commit-script".source = ../files/config/git/template/hooks/pre-commit;
     "jj/config.toml".source = ../files/config/jj/config.toml;
     "nixpkgs/config.nix".source = ../files/config/nixpkgs/config.nix;
+    "opencode/opencode.jsonc".source = ../files/config/opencode/opencode.jsonc;
     "pylintrc".source = ../files/config/pylintrc;
     "safe-rm".source = ../files/config/safe-rm;
     "vale/.vale.ini" = {

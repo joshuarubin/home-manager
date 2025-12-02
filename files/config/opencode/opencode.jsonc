@@ -1,0 +1,70 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "anthropic/claude-sonnet-4-5",
+  "theme": "tokyonight",
+  "lsp": {
+    "bash": {
+      "command": [
+        "bash-language-server",
+        "start"
+      ],
+      "extensions": [
+        ".sh",
+        ".bash",
+        ".zsh"
+      ]
+    },
+    "gopls": {
+      "command": [
+        "gopls"
+      ],
+      "extensions": [
+        ".go"
+      ],
+      "initialization": {
+        "analyses": {
+          "fieldalignment": false,
+          "shadow": true,
+          "unusedvariable": true
+        },
+        "codelenses": {
+          "gc_details": true
+        },
+        "buildFlags": [
+          "-tags=wireinject,integration"
+        ],
+        "local": "github.com/joshuarubin,github.com/poolsideai",
+        "gofumpt": true,
+        "vulncheck": "Imports"
+      }
+    },
+    "json": {
+      "command": [
+        "vscode-json-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".json",
+        ".jsonc"
+      ]
+    },
+    "markdown": {
+      "command": [
+        "marksman"
+      ],
+      "extensions": [
+        ".md",
+        ".markdown",
+        ".mdx"
+      ]
+    },
+    "nix": {
+      "command": [
+        "nil"
+      ],
+      "extensions": [
+        ".nix"
+      ]
+    }
+  }
+}

@@ -133,5 +133,91 @@ _: {
       enable = true;
       enableZshIntegration = true;
     };
+
+    crush = {
+      enable = true;
+      settings = {
+        lsp = {
+          bash = {
+            enabled = true;
+            command = "bash-language-server";
+            args = ["start"];
+          };
+          c = {
+            enabled = true;
+            command = "clangd";
+          };
+          cpp = {
+            enabled = true;
+            command = "clangd";
+          };
+          go = {
+            enabled = true;
+            command = "gopls";
+            options = {
+              analyses = {
+                fieldalignment = false;
+                shadow = true;
+                unusedvariable = true;
+              };
+              codelenses = {
+                gc_details = true;
+              };
+              buildFlags = ["-tags=wireinject,integration"];
+              local = "github.com/joshuarubin,github.com/poolsideai";
+              gofumpt = true;
+              vulncheck = "Imports";
+            };
+          };
+          json = {
+            enabled = true;
+            command = "vscode-json-language-server";
+            args = ["--stdio"];
+          };
+          lua = {
+            enabled = true;
+            command = "lua-language-server";
+          };
+          markdown = {
+            enabled = true;
+            command = "marksman";
+          };
+          nix = {
+            enabled = true;
+            command = "nil";
+          };
+          rust = {
+            enabled = true;
+            command = "rust-analyzer";
+          };
+          typescript = {
+            enabled = true;
+            command = "typescript-language-server";
+            args = ["--stdio"];
+          };
+          yaml = {
+            enabled = true;
+            command = "yaml-language-server";
+            args = ["--stdio"];
+          };
+        };
+        mcp = {};
+        models = {};
+        options = {
+          context_paths = [];
+          data_directory = ".crush";
+          debug = false;
+          debug_lsp = false;
+          disable_auto_summarize = false;
+          tui = {
+            compact_mode = false;
+          };
+        };
+        permissions = {
+          allowed_tools = [];
+        };
+        providers = {};
+      };
+    };
   };
 }

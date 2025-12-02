@@ -22,6 +22,7 @@ in {
     axel
     backblaze-b2
     bash
+    bash-language-server
     bat
     bazel-buildtools
     bazelisk
@@ -108,16 +109,22 @@ in {
     lua
     luajitPackages.luarocks
     luajitPackages.tl
+    lua-language-server
+    marksman
     mkcert
     mockgen
     mupdf
     unstable.neovim
     neovim-remote
+    nil
     nmap
     nodePackages.cdk8s-cli
     # nodePackages.cdktf-cli ## doesn't build
     nodePackages.eslint
     nodePackages.prettier
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted
+    nodePackages.yaml-language-server
     nodejs_22
     nssTools
     # oapi-codegen
