@@ -113,6 +113,7 @@
       "._*"
       ".apdisk"
       ".claude/settings.local.json"
+      ".opencode/"
       ".cvsignore"
       ".directory"
       ".envrc"

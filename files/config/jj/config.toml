@@ -26,6 +26,10 @@ l = ["log"]
 lb = ["log", "-r", "(main..@):: | (main..@)-"]
 # `jj la` shows all commits in the repository
 la = ["log", "-r", "all()"]
+# `jj ds -r <rev>` shows the complete description of a revision (e.g., jj ds -r @)
+ds = ["log", "--no-graph", "--template", "description"]
+# `jj dsc` shows the complete description of the current revision (@)
+dsc = ["log", "-r", "@", "--no-graph", "--template", "description"]
 
 [merge-tools.diffconflicts]
 program = "nvim"
