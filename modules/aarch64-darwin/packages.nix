@@ -1,8 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  unstable,
+  ...
+}: {
   home.packages = with pkgs; [
     colima
     coreutils-prefixed
-    docker-client
+    unstable.docker-client
     lima
     pngpaste
     pinentry_mac

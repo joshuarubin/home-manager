@@ -17,6 +17,9 @@ behavior = "own"
 backend = "gpg"
 key = "71AA74EA6C4CA520"
 
+[remotes.origin]
+auto-track-bookmarks = "glob:*"
+
 [aliases]
 d = ["diff", "--ignore-all-space"]
 di = ["diff", "--ignore-all-space"]
