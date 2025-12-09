@@ -27,6 +27,7 @@ Execute the complete push workflow interactively with the following steps:
 9. **Report result**: Show final state with `jj log -r 'ancestors(@, 4)' --color=never` and summarize what was pushed.
 
 **Commit message format**:
+
 - First line: Conventional commit format: `type(scope): description`
   - type: feat, fix, refactor, docs, test, chore, style, etc.
   - scope: the area affected (repo, workflow, home, zsh, git, etc.)
@@ -36,6 +37,7 @@ Execute the complete push workflow interactively with the following steps:
 - **NEVER** include "🤖 Generated with Claude Code" or "Co-Authored-By: Claude" lines
 
 **Important**:
+
 - Halt and ask for guidance if any step encounters conflicts or errors
 - Always use `jj` commands, never `git`
 - Commit descriptions must comprehensively describe ALL changes in the diff
