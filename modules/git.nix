@@ -81,6 +81,7 @@
       "!tags/"
       "#[._]s[a-w][a-z]"
       "$RECYCLE.BIN/"
+      "build/"
       "*.cab"
       "*.http"
       "*.lnk"

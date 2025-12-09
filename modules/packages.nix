@@ -67,6 +67,7 @@ in {
     fzf
     gdk
     gh
+    gettext
     git
     git-credential-manager
     gitleaks

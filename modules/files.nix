@@ -12,6 +12,10 @@
     ".local/bin/vim".source = "${unstable.neovim}/bin/nvim";
 
     ".actrc".source = ../files/actrc;
+    ".claude/commands" = {
+      source = ../files/claude/commands;
+      recursive = true;
+    };
     ".asdf" = {
       source = config.lib.file.mkOutOfStoreSymlink "${sysConfig.homeDirectory}/.local/share/asdf";
     };
