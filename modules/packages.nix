@@ -31,6 +31,7 @@ in {
     # bind  # temporarily disabled - conflicts with dig package in 25.11
     btop
     buf
+    bun
     c-ares
     cargo
     # clickhouse  # temporarily disabled - no binary cache in 25.11, builds from source
@@ -198,6 +199,7 @@ in {
     tree-sitter
     unbound
     unzip
+    uv
     vale
     watch
     wdiff
