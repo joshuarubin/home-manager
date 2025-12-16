@@ -31,6 +31,23 @@ ds = ["log", "--no-graph", "--template", "description"]
 # `jj dsc` shows the complete description of the current revision (@)
 dsc = ["log", "-r", "@", "--no-graph", "--template", "description"]
 
+# Short aliases for common commands
+s = ["status"]
+sh = ["show"]
+n = ["new"]
+r = ["rebase"]
+e = ["edit"]
+
+# Bookmark aliases
+bc = ["bookmark", "create"]
+bl = ["bookmark", "list"]
+bm = ["bookmark", "move"]
+bs = ["bookmark", "set"]
+
+# Git operation aliases
+gf = ["git", "fetch"]
+gp = ["git", "push"]
+
 [merge-tools.diffconflicts]
 program = "nvim"
 merge-args = [
