@@ -48,6 +48,9 @@ bs = ["bookmark", "set"]
 gf = ["git", "fetch"]
 gp = ["git", "push"]
 
+# Utility alias to list all aliases including built-in defaults (used by shell completion)
+aliases = ["config", "list", "--include-defaults", "--template", "if(name.starts_with(\"aliases.\"), name.remove_prefix(\"aliases.\") ++ \"=\" ++ value ++ \"\\n\", \"\")"]
+
 [merge-tools.diffconflicts]
 program = "nvim"
 merge-args = [

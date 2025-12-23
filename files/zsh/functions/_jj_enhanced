@@ -1,0 +1,176 @@
+#compdef jj
+
+# Enhanced jj completion with config alias support and smart revision completion
+
+# Load and save original _jj
+if (( ! $+functions[_jj_original] )); then
+  builtin autoload -Uz +X _jj
+  functions[_jj_original]="$functions[_jj]"
+fi
+
+# Completion function for jj bookmarks (for bookmark management commands)
+# Shows all bookmarks including remotes
+_jj_bookmarks() {
+  local -a bookmarks
+
+  local current_bookmark
+  while IFS= read -r line; do
+    if [[ "$line" =~ ^[^[:space:]] ]]; then
+      # Local bookmark (not indented)
+      current_bookmark="${line%%:*}"
+      bookmarks+=("${current_bookmark}:local bookmark")
+    elif [[ "$line" =~ ^[[:space:]]+@([^:[:space:]]+) ]]; then
+      # Remote bookmark (indented, starts with @)
+      local remote="${match[1]}"
+      bookmarks+=("${current_bookmark}@${remote}:remote bookmark")
+    fi
+  done < <(jj bookmark list --all-remotes 2>/dev/null)
+
+  _describe -t bookmarks 'bookmarks' bookmarks
+}
+
+# Completion function for jj revisions/revsets
+# Only shows bookmarks visible in default log (not all bookmarks)
+_jj_revisions() {
+  local -a revisions
+
+  # Add common revision expressions (always valid)
+  local -a common_revs=(
+    '@:working copy'
+    '@-:parent of working copy'
+    '@--:grandparent of working copy'
+  )
+  revisions+=("${common_revs[@]}")
+
+  # Parse change IDs, commit IDs, and bookmarks from log output
+  # Use the default log output (respects user's default revset)
+  # This will only include bookmarks that are visible in the default log
+  local line change_id commit_id desc bookmarks_str
+  while IFS= read -r line; do
+    # Skip empty lines
+    [[ -z "$line" ]] && continue
+    # Parse format: "change_id|commit_id|bookmarks|description"
+    # Using | as delimiter to avoid parsing issues
+    local -a parts
+    parts=("${(@s:|:)line}")
+
+    change_id="${parts[1]}"
+    commit_id="${parts[2]}"
+    bookmarks_str="${parts[3]}"
+    desc="${parts[4]:-}"
+
+    # Skip if no change_id or commit_id
+    [[ -z "$change_id" || -z "$commit_id" ]] && continue
+
+    # Use "(empty)" for commits without descriptions
+    [[ -z "$desc" ]] && desc="(empty)"
+    # Truncate description if too long
+    [[ ${#desc} -gt 50 ]] && desc="${desc:0:47}..."
+
+    # Parse bookmarks (space-separated list)
+    if [[ -n "$bookmarks_str" ]]; then
+      # Split on space to get individual bookmarks
+      local -a bookmark_list
+      bookmark_list=("${(@s: :)bookmarks_str}")
+      for bookmark in "${bookmark_list[@]}"; do
+        # Skip empty bookmarks
+        [[ -z "$bookmark" ]] && continue
+        # Remove the * suffix if present (indicates current bookmark)
+        local clean_bookmark="${bookmark%\*}"
+        # Only add the clean version without * suffix
+        revisions+=("${clean_bookmark}:${desc}")
+      done
+    fi
+
+    # Add change ID (short form) with description
+    revisions+=("${change_id}:${desc}")
+    # Add commit ID (git SHA, short form) with description
+    revisions+=("${commit_id}:${desc}")
+  done < <(jj log --no-graph --color=never -T 'change_id.short() ++ "|" ++ commit_id.short() ++ "|" ++ bookmarks ++ "|" ++ description.first_line() ++ "\n"' 2>/dev/null)
+
+  _describe -t revisions 'revisions' revisions
+}
+
+# No-op completion function for NAME arguments (bookmark names, tag names, etc.)
+# These shouldn't complete to files
+_jj_no_completion() {
+  # Offer no completions
+  return 1
+}
+
+# Parse jj config aliases
+typeset -gA _jj_config_aliases _jj_config_alias_map
+
+_jj_parse_config_aliases() {
+  [[ -n "$_jj_aliases_cached" ]] && return
+
+  local alias_name alias_value
+  while IFS='=' read -r alias_name alias_value; do
+    [[ -z "$alias_name" ]] && continue
+    alias_value="${alias_value#\[}"
+    alias_value="${alias_value%\]}"
+    local -a parts
+    parts=("${(@s:, :)alias_value}")
+    parts=("${parts[@]//\"/}")
+    _jj_config_aliases[$alias_name]="${(j: :)parts}"
+    _jj_config_alias_map[$alias_name]="${parts[1]}"
+  done < <(jj aliases 2>/dev/null)
+
+  _jj_aliases_cached=1
+}
+
+# Wrapper for _jj_commands to add config aliases
+_jj_commands() {
+  # First let the original _jj define _jj_commands if it exists in _jj_original
+  # We'll temporarily save our wrapper and restore the original behavior
+  local saved_func="$functions[_jj_commands]"
+  unfunction _jj_commands 2>/dev/null
+
+  # Call a subshell to get the commands from the original completion
+  # This extracts the command definitions that _jj would normally provide
+  local -a base_commands
+  base_commands=("${(@f)$(jj --help 2>/dev/null | sed -n '/^Commands:/,/^$/p' | tail -n +2 | sed 's/^  \([a-z-]*\)  */\1:/' | sed 's/  *$//')}")
+
+  local -a commands
+  commands=("${base_commands[@]}")
+
+  # Restore our wrapper
+  functions[_jj_commands]="$saved_func"
+
+  # Add config aliases
+  _jj_parse_config_aliases
+  local alias_name full_cmd
+  for alias_name full_cmd in ${(kv)_jj_config_aliases}; do
+    [[ "$alias_name" == "aliases" ]] && continue
+    commands+=("${alias_name}:config alias for: ${full_cmd}")
+  done
+
+  _describe -t commands 'jj commands' commands "$@"
+}
+
+# Main wrapper
+_jj() {
+  _jj_parse_config_aliases
+
+  # If completing after a config alias, delegate to the completion for the real command
+  # This makes `jj d <tab>` complete like `jj diff <tab>`
+  if (( CURRENT > 2 )) && (( $+_jj_config_alias_map[$words[2]] )); then
+    # Get the real command name
+    local real_cmd="$_jj_config_alias_map[$words[2]]"
+
+    # Temporarily replace words[2] with the real command
+    local saved_word="$words[2]"
+    words[2]="$real_cmd"
+
+    # Call the original completion
+    _jj_original "$@"
+    local ret=$?
+
+    # Restore original word
+    words[2]="$saved_word"
+    return $ret
+  fi
+
+  # Call original completion
+  _jj_original "$@"
+}

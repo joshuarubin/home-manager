@@ -79,7 +79,7 @@ in {
     go-mockery
     go-tools
     gofumpt
-    unstable.golangci-lint
+    golangci-lint
     golint
     gopls
     goreleaser

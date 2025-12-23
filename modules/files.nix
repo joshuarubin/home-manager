@@ -51,6 +51,8 @@
     ".tool-versions".source = ../files/tool-versions;
     ".zprofile".source = ../files/zprofile;
     ".zsh/functions".source = ../files/zsh/functions;
+    ".zsh/rc.d".source = ../files/zsh/rc.d;
+    ".zsh/after.d".source = ../files/zsh/after.d;
   };
 
   xdg.configFile = {

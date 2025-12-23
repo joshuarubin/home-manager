@@ -189,7 +189,3 @@ server () {
 diff () {
   command diff --unified "$@" | colordiff --difftype diffu
 }
-
-rg () {
-  command rg --json -C 2 "$@" | delta
-}

@@ -43,42 +43,18 @@
 
         autoload -Uz $fpath[1]/*(.:t)
 
-        # Nix cleanup function - keep last N generations
-        nix-clean() {
-          local keep=''${1:-5}
-          local gens=$(home-manager generations | awk '{print $5}' | sort -rn)
-          local total=$(echo "$gens" | wc -l | tr -d ' ')
-          local to_remove=$(echo "$gens" | tail -n +$((keep + 1)))
-
-          if [[ $total -le $keep ]]; then
-            echo "Only $total generations exist, keeping all"
-          else
-            echo "Removing $((total - keep)) old generations (keeping last $keep)"
-            echo "$to_remove" | xargs -r home-manager remove-generations
-          fi
-
-          nix-collect-garbage -d
-          nix-store --optimise
-        }
-
-        # Light version without optimize
-        nix-clean-light() {
-          local keep=''${1:-5}
-          local gens=$(home-manager generations | awk '{print $5}' | sort -rn)
-          local total=$(echo "$gens" | wc -l | tr -d ' ')
-          local to_remove=$(echo "$gens" | tail -n +$((keep + 1)))
-
-          if [[ $total -le $keep ]]; then
-            echo "Only $total generations exist, keeping all"
-          else
-            echo "Removing $((total - keep)) old generations (keeping last $keep)"
-            echo "$to_remove" | xargs -r home-manager remove-generations
-          fi
-
-          nix-collect-garbage -d
-        }
+        # Source all rc.d scripts
+        for rcfile in "$HOME"/.zsh/rc.d/*.zsh(N); do
+          source "$rcfile"
+        done
       '')
       (builtins.readFile ../files/zshrc)
+      (lib.mkAfter ''
+        # Source all after.d scripts (after compinit)
+        for rcfile in "$HOME"/.zsh/after.d/*.zsh(N); do
+          source "$rcfile"
+        done
+      '')
     ];
 
     # TODO(jawa) review completion
@@ -180,26 +156,5 @@
     # Nix cleanup aliases
     nix-gc = "nix-collect-garbage -d";
     hm = "home-manager";
-
-    # jj (Jujutsu VCS) aliases - call jj config aliases where available
-    jjb = "jj bookmark";
-    jjbc = "jj bc";  # expands to: jj bookmark create
-    jjbl = "jj bl";  # expands to: jj bookmark list
-    jjbm = "jj bm";  # expands to: jj bookmark move
-    jjbs = "jj bs";  # expands to: jj bookmark set
-    jjd = "jj d";  # expands to: jj diff --ignore-all-space
-    jjdesc = "jj describe";
-    jjds = "jj ds";  # expands to: jj log --no-graph --template description
-    jjdsc = "jj dsc";  # expands to: jj log -r @ --no-graph --template description
-    jje = "jj e";  # expands to: jj edit
-    jjgf = "jj gf";  # expands to: jj git fetch
-    jjgp = "jj gp";  # expands to: jj git push
-    jjl = "jj l";  # expands to: jj log
-    jjla = "jj la";  # expands to: jj log -r 'all()'
-    jjlb = "jj lb";  # expands to: jj log -r '(main..@):: | (main..@)-'
-    jjn = "jj n";  # expands to: jj new
-    jjr = "jj r";  # expands to: jj rebase
-    jjs = "jj s";  # expands to: jj status
-    jjsh = "jj sh";  # expands to: jj show
   };
 }
