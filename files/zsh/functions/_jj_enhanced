@@ -29,8 +29,25 @@ _jj_bookmarks() {
   _describe -t bookmarks 'bookmarks' bookmarks
 }
 
+# Completion function for jj tags (for tag management commands)
+# Shows all tags
+_jj_tags() {
+  local -a tags
+
+  local line tag_name
+  while IFS= read -r line; do
+    # Parse format: "tag_name: change_id"
+    # Extract just the tag name (everything before the colon)
+    tag_name="${line%%:*}"
+    [[ -z "$tag_name" ]] && continue
+    tags+=("${tag_name}:tag")
+  done < <(jj tag list 2>/dev/null)
+
+  _describe -t tags 'tags' tags
+}
+
 # Completion function for jj revisions/revsets
-# Only shows bookmarks visible in default log (not all bookmarks)
+# Only shows bookmarks and tags visible in default log (not all bookmarks/tags)
 _jj_revisions() {
   local -a revisions
 
@@ -42,14 +59,14 @@ _jj_revisions() {
   )
   revisions+=("${common_revs[@]}")
 
-  # Parse change IDs, commit IDs, and bookmarks from log output
+  # Parse change IDs, commit IDs, bookmarks, and tags from log output
   # Use the default log output (respects user's default revset)
-  # This will only include bookmarks that are visible in the default log
-  local line change_id commit_id desc bookmarks_str
+  # This will only include bookmarks and tags that are visible in the default log
+  local line change_id commit_id desc bookmarks_str tags_str
   while IFS= read -r line; do
     # Skip empty lines
     [[ -z "$line" ]] && continue
-    # Parse format: "change_id|commit_id|bookmarks|description"
+    # Parse format: "change_id|commit_id|bookmarks|tags|description"
     # Using | as delimiter to avoid parsing issues
     local -a parts
     parts=("${(@s:|:)line}")
@@ -57,7 +74,8 @@ _jj_revisions() {
     change_id="${parts[1]}"
     commit_id="${parts[2]}"
     bookmarks_str="${parts[3]}"
-    desc="${parts[4]:-}"
+    tags_str="${parts[4]}"
+    desc="${parts[5]:-}"
 
     # Skip if no change_id or commit_id
     [[ -z "$change_id" || -z "$commit_id" ]] && continue
@@ -82,11 +100,23 @@ _jj_revisions() {
       done
     fi
 
+    # Parse tags (space-separated list)
+    if [[ -n "$tags_str" ]]; then
+      # Split on space to get individual tags
+      local -a tag_list
+      tag_list=("${(@s: :)tags_str}")
+      for tag in "${tag_list[@]}"; do
+        # Skip empty tags
+        [[ -z "$tag" ]] && continue
+        revisions+=("${tag}:${desc}")
+      done
+    fi
+
     # Add change ID (short form) with description
     revisions+=("${change_id}:${desc}")
     # Add commit ID (git SHA, short form) with description
     revisions+=("${commit_id}:${desc}")
-  done < <(jj log --no-graph --color=never -T 'change_id.short() ++ "|" ++ commit_id.short() ++ "|" ++ bookmarks ++ "|" ++ description.first_line() ++ "\n"' 2>/dev/null)
+  done < <(jj log --no-graph --color=never -T 'change_id.short() ++ "|" ++ commit_id.short() ++ "|" ++ bookmarks ++ "|" ++ tags ++ "|" ++ description.first_line() ++ "\n"' 2>/dev/null)
 
   _describe -t revisions 'revisions' revisions
 }

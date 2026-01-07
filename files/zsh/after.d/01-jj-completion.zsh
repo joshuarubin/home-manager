@@ -48,6 +48,10 @@ _jj_completion_setup() {
     functions[_jj_original]="${functions[_jj_original]//\*::names -- Show bookmarks whose local name matches:_default/*::names -- Show bookmarks whose local name matches:_jj_bookmarks}"
     functions[_jj_original]="${functions[_jj_original]//\*::names -- Move bookmarks matching the given name patterns:_default/*::names -- Move bookmarks matching the given name patterns:_jj_bookmarks}"
 
+    # Tag commands: complete existing tags
+    functions[_jj_original]="${functions[_jj_original]//\*::names -- Tag names to delete:_default/*::names -- Tag names to delete:_jj_tags}"
+    functions[_jj_original]="${functions[_jj_original]//\*::names -- Show tags whose local name matches:_default/*::names -- Show tags whose local name matches:_jj_tags}"
+
     # 3. Handle positional revision arguments
     functions[_jj_original]="${functions[_jj_original]//\*::revisions -- Parent\(s\) of the new change:_default/*::revisions -- Parent(s) of the new change:_jj_revisions}"
     functions[_jj_original]="${functions[_jj_original]//\*::revisions_pos -- The revision\(s\) to abandon \(default\: @\):_default/*::revisions_pos -- The revision(s) to abandon (default: @):_jj_revisions}"
