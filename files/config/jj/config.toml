@@ -9,7 +9,6 @@ editor = ["nvim", "--cmd", "let g:flatten_wait=1"]
 default-command = "status"
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 pager = "delta"
-conflict-marker-style = "git"
 diff-formatter = ":git"
 
 [signing]
@@ -49,7 +48,14 @@ gf = ["git", "fetch"]
 gp = ["git", "push"]
 
 # Utility alias to list all aliases including built-in defaults (used by shell completion)
-aliases = ["config", "list", "--include-defaults", "--template", "if(name.starts_with(\"aliases.\"), name.remove_prefix(\"aliases.\") ++ \"=\" ++ value ++ \"\\n\", \"\")"]
+aliases = [
+  "config",
+  "list",
+  "--include-defaults",
+  "--template",
+  "if(name.starts_with(\"aliases.\"), name.remove_prefix(\"aliases.\") ++ \"=\" ++ value ++ \"\\n\", \"\")",
+]
+
 
 [merge-tools.diffconflicts]
 program = "nvim"
