@@ -104,17 +104,53 @@ typeset -gA _jj_config_aliases _jj_config_alias_map
 _jj_parse_config_aliases() {
   [[ -n "$_jj_aliases_cached" ]] && return
 
-  local alias_name alias_value
-  while IFS='=' read -r alias_name alias_value; do
-    [[ -z "$alias_name" ]] && continue
-    alias_value="${alias_value#\[}"
-    alias_value="${alias_value%\]}"
-    local -a parts
-    parts=("${(@s:, :)alias_value}")
-    parts=("${parts[@]//\"/}")
-    _jj_config_aliases[$alias_name]="${(j: :)parts}"
-    _jj_config_alias_map[$alias_name]="${parts[1]}"
-  done < <(jj aliases 2>/dev/null)
+  # Cache file for parsed aliases (shared with shell alias generation)
+  local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+  local cache_file="$cache_dir/jj-aliases-parsed.cache"
+  local config_file="${XDG_CONFIG_HOME:-$HOME/.config}/jj/config.toml"
+
+  # Check if cache is valid
+  local use_cache=0
+  if [[ -f "$cache_file" ]]; then
+    if [[ -f "$config_file" ]]; then
+      [[ "$cache_file" -nt "$config_file" ]] && use_cache=1
+    else
+      use_cache=1
+    fi
+  fi
+
+  if (( use_cache )); then
+    # Load from cache
+    # Format: alias_name|full_expansion|first_word
+    local line alias_name full_expansion first_word
+    while IFS='|' read -r alias_name full_expansion first_word; do
+      [[ -z "$alias_name" ]] && continue
+      _jj_config_aliases[$alias_name]="$full_expansion"
+      _jj_config_alias_map[$alias_name]="$first_word"
+    done < "$cache_file"
+  else
+    # Parse and cache
+    [[ ! -d "$cache_dir" ]] && mkdir -p "$cache_dir"
+    : > "$cache_file"
+
+    local alias_name alias_value
+    while IFS='=' read -r alias_name alias_value; do
+      [[ -z "$alias_name" ]] && continue
+      alias_value="${alias_value#\[}"
+      alias_value="${alias_value%\]}"
+      local -a parts
+      parts=("${(@s:, :)alias_value}")
+      parts=("${parts[@]//\"/}")
+      local full_expansion="${(j: :)parts}"
+      local first_word="${parts[1]}"
+
+      _jj_config_aliases[$alias_name]="$full_expansion"
+      _jj_config_alias_map[$alias_name]="$first_word"
+
+      # Save to cache
+      echo "${alias_name}|${full_expansion}|${first_word}" >> "$cache_file"
+    done < <(jj aliases 2>/dev/null)
+  fi
 
   _jj_aliases_cached=1
 }
