@@ -211,6 +211,7 @@ in {
     zlib
     zoxide
     zsh-completions
+    zsh-syntax-highlighting
     zstd
   ];
 }

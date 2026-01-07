@@ -25,7 +25,7 @@
       fi
     '';
     syntaxHighlighting = {
-      enable = true;
+      enable = false; # Manually loaded with deferred loading for faster startup
     };
     defaultKeymap = "viins";
 
@@ -67,6 +67,30 @@
         for rcfile in "$HOME"/.zsh/after.d/*.zsh(N); do
           source "$rcfile"
         done
+
+        # Deferred loading of syntax highlighting for faster startup
+        # This loads highlighting after the first prompt appears
+        _zsh_defer_syntax_highlighting() {
+          # Find the syntax highlighting plugin
+          local zsh_syntax_highlighting
+          for dir in /nix/store/*-zsh-syntax-highlighting-*/share/zsh-syntax-highlighting; do
+            if [[ -f "$dir/zsh-syntax-highlighting.zsh" ]]; then
+              zsh_syntax_highlighting="$dir/zsh-syntax-highlighting.zsh"
+              break
+            fi
+          done
+
+          if [[ -n "$zsh_syntax_highlighting" ]]; then
+            source "$zsh_syntax_highlighting"
+          fi
+
+          # Remove this hook after first run
+          add-zsh-hook -d precmd _zsh_defer_syntax_highlighting
+        }
+
+        # Schedule syntax highlighting to load after first prompt
+        autoload -Uz add-zsh-hook
+        add-zsh-hook precmd _zsh_defer_syntax_highlighting
       '')
     ];
 
