@@ -152,25 +152,69 @@ _jj_commands() {
 _jj() {
   _jj_parse_config_aliases
 
-  # If completing after a config alias, delegate to the completion for the real command
-  # This makes `jj d <tab>` complete like `jj diff <tab>`
-  if (( CURRENT > 2 )) && (( $+_jj_config_alias_map[$words[2]] )); then
-    # Get the real command name
-    local real_cmd="$_jj_config_alias_map[$words[2]]"
+  # If the second word is a config alias, we need to handle it specially
+  # This makes `jj bm <tab>` complete like `jj bookmark move <tab>`
+  if (( CURRENT >= 2 )) && (( $+_jj_config_aliases[$words[2]] )); then
+    # Get the full alias expansion (e.g., "bookmark move" for "bm")
+    local expansion="${_jj_config_aliases[$words[2]]}"
+    local -a expansion_parts
+    expansion_parts=("${(@s: :)expansion}")
 
-    # Temporarily replace words[2] with the real command
-    local saved_word="$words[2]"
-    words[2]="$real_cmd"
+    # Replace the alias in $words with its expansion
+    # Original: (jj bm arg1 arg2)
+    # Becomes: (jj bookmark move arg1 arg2)
+    local -a new_words
+    new_words=("$words[1]")
+    new_words+=("${expansion_parts[@]}")
+    if (( ${#words} > 2 )); then
+      new_words+=("${words[@]:2}")
+    fi
 
-    # Call the original completion
+    # Calculate the new CURRENT position
+    local new_current
+    if (( CURRENT == 2 )); then
+      # Completing the alias itself - stay at position 2
+      new_current=2
+    else
+      # After the alias - shift position by (expansion_length - 1)
+      new_current=$((CURRENT + ${#expansion_parts} - 1))
+    fi
+
+    # Set up new context
+    words=("${new_words[@]}")
+    CURRENT=$new_current
+
+    # Call the patched original completion
+    # _jj_original defines the inner _jj function but doesn't call it
+    # because $funcstack[1] is "_jj" not "_jj_original"
+    # So we need to call it to set up the functions, then call the inner _jj
+
+    # First, save our wrapper so we can temporarily undefine it
+    local saved_wrapper="${functions[_jj]}"
+    unfunction _jj
+
+    # Call _jj_original to define the inner _jj and helpers
     _jj_original "$@"
+
+    # Now call the inner _jj that was just defined
+    _jj "$@"
     local ret=$?
 
-    # Restore original word
-    words[2]="$saved_word"
+    # Restore our wrapper
+    functions[_jj]="$saved_wrapper"
+
     return $ret
   fi
 
-  # Call original completion
+  # Call patched original completion
+  local saved_wrapper="${functions[_jj]}"
+  unfunction _jj
+
   _jj_original "$@"
+  _jj "$@"
+  local ret=$?
+
+  functions[_jj]="$saved_wrapper"
+
+  return $ret
 }

@@ -16,11 +16,11 @@ if [[ -f "$HOME/.zsh/functions/_jj_enhanced" ]]; then
   # Source our enhancements which will replace _jj
   source "$HOME/.zsh/functions/_jj_enhanced"
 
-  # Patch the real _jj function to handle aliases and revisions
-  # 1. Add config alias resolution before the case statement
-  functions[_jj_original]="${functions[_jj_original]//case \$line\[1\] in/if (( \$+_jj_config_alias_map[\$line[1]] )); then line[1]="\$_jj_config_alias_map[\$line[1]]"; fi; case \$line[1] in}"
+  # Patch the real _jj function to handle revisions
+  # Note: Config alias expansion is now handled in the _jj() wrapper in _jj_enhanced,
+  # so we don't patch for alias resolution here.
 
-  # 2. Replace :_default with :_jj_revisions for REVSET/REVSETS parameters
+  # 1. Replace :_default with :_jj_revisions for REVSET/REVSETS parameters
   functions[_jj_original]="${functions[_jj_original]//]:REVSET:_default/]:REVSET:_jj_revisions}"
   functions[_jj_original]="${functions[_jj_original]//]:REVSETS:_default/]:REVSETS:_jj_revisions}"
 

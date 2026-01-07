@@ -9,7 +9,9 @@ if (( $+commands[jj] )); then
     # Skip the 'aliases' alias itself
     [[ "$alias_name" == "aliases" ]] && continue
 
-    # Create shell alias: jj<name> -> "jj <name>"
+    # Create global alias (-g makes it expand anywhere, but we want command position only)
+    # Use regular alias which expands in command position
     alias "jj${alias_name}=jj ${alias_name}"
   done < <(jj aliases 2>/dev/null)
+
 fi
