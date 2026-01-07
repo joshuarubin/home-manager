@@ -11,6 +11,19 @@
       enable = true;
     };
     enableCompletion = true;
+    completionInit = ''
+      # Smart compinit with caching
+      # Only run security check once per day, otherwise use cached version
+      autoload -Uz compinit
+      local zcompdump="''${ZDOTDIR:-$HOME}/.zcompdump"
+      if [[ -f "$zcompdump" && $(date -r "$zcompdump" +%s 2>/dev/null || echo 0) -gt $(($(date +%s) - 86400)) ]]; then
+        # Dump is less than 24h old, skip security check
+        compinit -C
+      else
+        # Regenerate and check
+        compinit
+      fi
+    '';
     syntaxHighlighting = {
       enable = true;
     };
