@@ -12,6 +12,10 @@
       url = "github:nix-community/nur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fast-flake-update = {
+      url = "github:Mic92/fast-flake-update";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -20,6 +24,7 @@
     nixpkgs-unstable,
     home-manager,
     nur,
+    fast-flake-update,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -57,6 +62,7 @@
     }: let
       system = "aarch64-darwin";
       nurpkgs = nur.legacyPackages.${system};
+      fastFlakeUpdatePkg = fast-flake-update.packages.${system}.default;
     in
       home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
@@ -75,7 +81,7 @@
         ];
 
         extraSpecialArgs = {
-          inherit inputs outputs nur allowedUnfreePackages hostname gpgKey;
+          inherit inputs outputs nur allowedUnfreePackages hostname gpgKey fastFlakeUpdatePkg;
           unstable = mkUnstableWithConfig system;
           sysConfig = {
             inherit username stateVersion;

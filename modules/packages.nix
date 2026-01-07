@@ -1,6 +1,7 @@
 {
   pkgs,
   unstable,
+  fastFlakeUpdatePkg,
   ...
 }: let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
@@ -62,6 +63,7 @@ in {
     duf
     eternal-terminal
     eza
+    fastFlakeUpdatePkg
     fd
     fluxcd
     flyctl
