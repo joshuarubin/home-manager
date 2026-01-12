@@ -91,4 +91,8 @@
           chmod +x ~/.config/git/template/hooks/pre-commit
         fi
   '';
+
+  home.activation.clearZshCompletionCache = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        run rm -f ~/.zcompdump*
+  '';
 }
