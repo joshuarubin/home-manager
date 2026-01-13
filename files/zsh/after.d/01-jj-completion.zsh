@@ -54,7 +54,7 @@ _jj_completion_setup() {
 
     # 3. Handle positional revision arguments
     functions[_jj_original]="${functions[_jj_original]//\*::revisions -- Parent\(s\) of the new change:_default/*::revisions -- Parent(s) of the new change:_jj_revisions}"
-    functions[_jj_original]="${functions[_jj_original]//\*::revisions_pos -- The revision\(s\) to abandon \(default\: @\):_default/*::revisions_pos -- The revision(s) to abandon (default: @):_jj_revisions}"
+    functions[_jj_original]="${functions[_jj_original]//\*::revisions_pos -- The revision\(s\) to abandon \(default\\: @\):_default/*::revisions_pos -- The revision(s) to abandon:_jj_revisions}"
     functions[_jj_original]="${functions[_jj_original]//:revision -- The commit to edit:_default/:revision -- The commit to edit:_jj_revisions}"
     functions[_jj_original]="${functions[_jj_original]//::revision -- Show changes in this revision, compared to its parent\(s\):_default/::revision -- Show changes in this revision, compared to its parent(s):_jj_revisions}"
     # Generic revision positional argument
