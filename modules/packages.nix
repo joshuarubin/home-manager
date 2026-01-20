@@ -65,6 +65,7 @@ in {
     eza
     fastFlakeUpdatePkg
     fd
+    ffmpeg
     fluxcd
     flyctl
     fzf
@@ -154,6 +155,7 @@ in {
         botocore
         flake8
         fonttools
+        huggingface-hub
         identify
         numpy
         pandas
@@ -203,6 +205,7 @@ in {
     unzip
     uv
     vale
+    viu
     watch
     wdiff
     wezterm

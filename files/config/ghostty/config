@@ -140,7 +140,7 @@ font-feature = +ss01
 # On Linux with GTK, font size is scaled according to both display-wide and
 # text-specific scaling factors, which are often managed by your desktop
 # environment (e.g. the GNOME display scale and large text settings).
-font-size = 12
+font-size = 11
 
 # A repeatable configuration to set one or more font variations values for
 # a variable font. A variable font is a single font, usually with a filename
@@ -1024,7 +1024,7 @@ mouse-scroll-multiplier = precision:1,discrete:3
 # widgets to show through which isn't generally desirable.
 #
 # On macOS, changing this configuration requires restarting Ghostty completely.
-background-opacity = 0.9
+background-opacity = 1
 
 # Applies background opacity to cells with an explicit background color
 # set.
