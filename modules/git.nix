@@ -170,6 +170,14 @@
         };
       }
       {
+        condition = "hasconfig:remote.*.url:https://github.com/runstateops/**";
+        contents = {
+          user = {
+            email = "joshua@runstateops.com";
+          };
+        };
+      }
+      {
         condition = "hasconfig:remote.*.url:https://github.com/**";
         contents = {
           credential = {

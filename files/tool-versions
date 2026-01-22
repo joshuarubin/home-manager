@@ -1,4 +1,5 @@
+cue system
 golang system
+golangci-lint system
 nodejs system
 pnpm system
-golangci-lint system

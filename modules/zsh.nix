@@ -6,7 +6,7 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    cdpath = ["." "$HOME" "$HOME/dev/poolside" "$HOME/dev"];
+    cdpath = ["." "$HOME" "$HOME/dev/runstate" "$HOME/dev/poolside" "$HOME/dev"];
     autosuggestion = {
       enable = true;
     };
@@ -44,13 +44,7 @@
     initContent = lib.mkMerge [
       (lib.mkBefore ''
         export ASDF_DATA_DIR=$HOME/.local/share/asdf
-        export NIX_PATH=$HOME/.nix-defexpr/channels
         export GPG_TTY="$(tty)"; # put this here and not in sessionVariables to ensure it gets reexecuted for all interactive shells
-
-        # Ensure NIX_PROFILES is set (needed for non-login shells)
-        if [[ -z "$NIX_PROFILES" && -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
-          . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-        fi
 
         fpath=(
           "$HOME/.zsh/functions"

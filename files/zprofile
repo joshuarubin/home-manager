@@ -15,4 +15,12 @@ if [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+export NIX_PATH=$HOME/.nix-defexpr/channels
+
+# Ensure NIX_PROFILES is set (needed for non-login shells)
+if [[ -z "$NIX_PROFILES" && -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
+
 # vim: ft=zsh

@@ -33,7 +33,7 @@
         "buildFlags": [
           "-tags=wireinject,integration"
         ],
-        "local": "github.com/joshuarubin,github.com/poolsideai",
+        "local": "github.com/joshuarubin,github.com/runstateops,github.com/poolsideai",
         "gofumpt": true,
         "vulncheck": "Imports"
       }

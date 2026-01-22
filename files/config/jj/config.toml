@@ -2,7 +2,7 @@
 
 [user]
 name = "Joshua Rubin"
-email = "joshua@poolside.ai"
+email = "me@jawa.dev"
 
 [ui]
 editor = ["nvim", "--cmd", "let g:flatten_wait=1"]

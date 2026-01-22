@@ -39,7 +39,7 @@ _: {
     go = {
       enable = true;
       env = {
-        GOPRIVATE = "github.com/poolsideai/*";
+        GOPRIVATE = "github.com/runstateops/*,github.com/poolsideai/*";
       };
     };
 
@@ -164,7 +164,7 @@ _: {
                 gc_details = true;
               };
               buildFlags = ["-tags=wireinject,integration"];
-              local = "github.com/joshuarubin,github.com/poolsideai";
+              local = "github.com/joshuarubin,github.com/runstateops,github.com/poolsideai";
               gofumpt = true;
               vulncheck = "Imports";
             };
