@@ -11,6 +11,7 @@ in {
   home.packages = with pkgs; [
     _1password-cli
     act
+    actionlint
     unstable.aider-chat
     alejandra
     unstable.amp-cli
@@ -35,6 +36,7 @@ in {
     bun
     c-ares
     cargo
+    check-jsonschema
     # clickhouse  # temporarily disabled - no binary cache in 25.11, builds from source
     clippy
     cmake
@@ -115,6 +117,7 @@ in {
     luajitPackages.luarocks
     luajitPackages.tl
     lua-language-server
+    markdownlint-cli2
     marksman
     mkcert
     mockgen
@@ -211,6 +214,7 @@ in {
     wezterm
     wget
     wire
+    yamlfix
     yamllint
     zig
     zlib
