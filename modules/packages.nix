@@ -42,6 +42,7 @@ in {
     check-jsonschema
     # clickhouse  # temporarily disabled - no binary cache in 25.11, builds from source
     clippy
+    cloc
     cmake
     colordiff
     colormake
@@ -205,6 +206,7 @@ in {
     tanka
     temporal-cli
     tmate
+    tokei
     tree-sitter
     unbound
     unzip
