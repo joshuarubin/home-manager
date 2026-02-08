@@ -98,7 +98,6 @@ in {
     grpcurl
     hiera-eyaml
     htop
-    # inetutils
     ipcalc
     jdk
     jq
