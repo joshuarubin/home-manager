@@ -8,7 +8,7 @@ Host *
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # make things fast for things we know shouldn't be canonicalized
-Host * !github.com !*.local
+Host * !vermithor !tessarion !github.com !*.local
   CanonicalizeHostname always
   CanonicalDomains local
 
@@ -19,6 +19,7 @@ Host tessarion
   HostName tessarion.local
 
 Host tessarion vermithor balerion pi4 *.local
+  AddressFamily inet
   ForwardAgent yes
 
 Host pi4
