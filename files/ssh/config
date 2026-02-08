@@ -12,7 +12,13 @@ Host * !github.com !*.local
   CanonicalizeHostname always
   CanonicalDomains local
 
-Host balerion pi4 *.local
+Host vermithor
+  HostName vermithor.local
+
+Host tessarion
+  HostName tessarion.local
+
+Host tessarion vermithor balerion pi4 *.local
   ForwardAgent yes
 
 Host pi4
