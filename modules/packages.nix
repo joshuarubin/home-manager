@@ -7,6 +7,9 @@
   gdk = pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
     gke-gcloud-auth-plugin
   ]);
+  julia-bin = pkgs.julia-bin.overrideAttrs (_: {
+    doInstallCheck = false;
+  });
 in {
   home.packages = with pkgs; [
     _1password-cli
@@ -95,7 +98,7 @@ in {
     grpcurl
     hiera-eyaml
     htop
-    inetutils
+    # inetutils
     ipcalc
     jdk
     jq

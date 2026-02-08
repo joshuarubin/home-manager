@@ -2620,7 +2620,7 @@ shell-integration = detect
 # when both `ssh-env` and `ssh-terminfo` are enabled, Ghostty will install its
 # terminfo on remote hosts and use `xterm-ghostty` as TERM, falling back to
 # `xterm-256color` with environment variables if terminfo installation fails.
-shell-integration-features = cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,path
+shell-integration-features = cursor,title,ssh-env,ssh-terminfo,path
 
 # Custom entries into the command palette.
 #

@@ -39,9 +39,12 @@ e = ["edit"]
 
 # Bookmark aliases
 bc = ["bookmark", "create"]
+bd = ["bookmark", "delete"]
 bl = ["bookmark", "list"]
 bm = ["bookmark", "move"]
 bs = ["bookmark", "set"]
+bt = ["bookmark", "track"]
+bu = ["bookmark", "untrack"]
 
 # Git operation aliases
 gf = ["git", "fetch"]

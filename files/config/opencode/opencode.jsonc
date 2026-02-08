@@ -31,9 +31,9 @@
           "gc_details": true
         },
         "buildFlags": [
-          "-tags=wireinject,integration"
+          "-tags=integration"
         ],
-        "local": "github.com/joshuarubin,github.com/runstateops,github.com/poolsideai",
+        "local": "github.com/runstateops",
         "gofumpt": true,
         "vulncheck": "Imports"
       }

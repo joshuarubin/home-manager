@@ -6,7 +6,7 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    cdpath = ["." "$HOME" "$HOME/dev/runstate" "$HOME/dev/poolside" "$HOME/dev"];
+    cdpath = ["." "$HOME" "$HOME/dev/runstate" "$HOME/dev"];
     autosuggestion = {
       enable = true;
     };

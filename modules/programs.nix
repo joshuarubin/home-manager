@@ -39,7 +39,7 @@ _: {
     go = {
       enable = true;
       env = {
-        GOPRIVATE = "github.com/runstateops/*,github.com/poolsideai/*";
+        GOPRIVATE = "github.com/runstateops/*";
       };
     };
 
@@ -139,20 +139,16 @@ _: {
       settings = {
         lsp = {
           bash = {
-            enabled = true;
             command = "bash-language-server";
             args = ["start"];
           };
           c = {
-            enabled = true;
             command = "clangd";
           };
           cpp = {
-            enabled = true;
             command = "clangd";
           };
           go = {
-            enabled = true;
             command = "gopls";
             options = {
               analyses = {
@@ -163,46 +159,37 @@ _: {
               codelenses = {
                 gc_details = true;
               };
-              buildFlags = ["-tags=wireinject,integration"];
-              local = "github.com/joshuarubin,github.com/runstateops,github.com/poolsideai";
+              buildFlags = ["-tags=integration"];
+              local = "github.com/runstateops";
               gofumpt = true;
               vulncheck = "Imports";
             };
           };
           json = {
-            enabled = true;
             command = "vscode-json-language-server";
             args = ["--stdio"];
           };
           lua = {
-            enabled = true;
             command = "lua-language-server";
           };
           markdown = {
-            enabled = true;
             command = "marksman";
           };
           nix = {
-            enabled = true;
             command = "nil";
           };
           rust = {
-            enabled = true;
             command = "rust-analyzer";
           };
           typescript = {
-            enabled = true;
             command = "typescript-language-server";
             args = ["--stdio"];
           };
           yaml = {
-            enabled = true;
             command = "yaml-language-server";
             args = ["--stdio"];
           };
         };
-        mcp = {};
-        models = {};
         options = {
           context_paths = [];
           data_directory = ".crush";
@@ -213,10 +200,6 @@ _: {
             compact_mode = false;
           };
         };
-        permissions = {
-          allowed_tools = [];
-        };
-        providers = {};
       };
     };
   };
