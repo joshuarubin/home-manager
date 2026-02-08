@@ -162,6 +162,14 @@
 
     includes = [
       {
+        condition = "hasconfig:remote.*.url:https://github.com/escapement-dev/**";
+        contents = {
+          user = {
+            email = "joshua@escapement.dev";
+          };
+        };
+      }
+      {
         condition = "hasconfig:remote.*.url:https://github.com/runstateops/**";
         contents = {
           user = {

@@ -33,7 +33,7 @@
         "buildFlags": [
           "-tags=integration"
         ],
-        "local": "github.com/runstateops",
+        "local": "github.com/escapement-dev",
         "gofumpt": true,
         "vulncheck": "Imports"
       }

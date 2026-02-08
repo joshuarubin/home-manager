@@ -39,7 +39,7 @@ _: {
     go = {
       enable = true;
       env = {
-        GOPRIVATE = "github.com/runstateops/*";
+        GOPRIVATE = "github.com/escapement-dev/*";
       };
     };
 
@@ -160,7 +160,7 @@ _: {
                 gc_details = true;
               };
               buildFlags = ["-tags=integration"];
-              local = "github.com/runstateops";
+              local = "github.com/escapement-dev";
               gofumpt = true;
               vulncheck = "Imports";
             };

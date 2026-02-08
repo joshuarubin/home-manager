@@ -6,7 +6,7 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    cdpath = ["." "$HOME" "$HOME/dev/runstate" "$HOME/dev"];
+    cdpath = ["." "$HOME" "$HOME/dev/escapement" "$HOME/dev"];
     autosuggestion = {
       enable = true;
     };
@@ -131,6 +131,7 @@
     WINEARCH = "win32";
     YAMLFIX_SECTION_WHITELINES = "1";
     XZ_DEFAULTS = "--threads=0";
+    RUN_USE_XDG_PATHS = "1";
   };
 
   home.shellAliases = {
