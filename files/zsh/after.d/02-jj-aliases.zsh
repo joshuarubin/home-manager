@@ -37,6 +37,8 @@ if (( $+commands[jj] )); then
     : > "$cache_file"  # Clear cache file
     while IFS='=' read -r alias_name alias_value; do
       [[ -z "$alias_name" ]] && continue
+      # Skip continuation lines (start with whitespace) from multi-line values
+      [[ "$alias_name" =~ ^[[:space:]] ]] && continue
       # Skip the 'aliases' alias itself
       [[ "$alias_name" == "aliases" ]] && continue
 
