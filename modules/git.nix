@@ -83,7 +83,6 @@
       "$RECYCLE.BIN/"
       "build/"
       "*.cab"
-      "*.http"
       "*.lnk"
       "*.msi"
       "*.msm"
