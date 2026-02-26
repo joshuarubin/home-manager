@@ -97,6 +97,7 @@ in {
     grc
     grpc
     grpcurl
+    hermitcli
     hiera-eyaml
     htop
     ipcalc
