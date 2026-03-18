@@ -1,0 +1,34 @@
+[default]
+sso_session = Escapement
+sso_account_id = 150374087561
+sso_role_name = AdministratorAccess
+region = il-central-1
+
+[sso-session Escapement]
+sso_start_url = https://ssoins-8316ae7490a608f8.portal.il-central-1.app.aws
+sso_region = il-central-1
+sso_registration_scopes = sso:account:access
+
+[profile management]
+sso_session = Escapement
+sso_account_id = 648471849731
+sso_role_name = AdministratorAccess
+region = il-central-1
+
+[profile security]
+sso_session = Escapement
+sso_account_id = 969644818473
+sso_role_name = AdministratorAccess
+region = il-central-1
+
+[profile dev]
+sso_session = Escapement
+sso_account_id = 150374087561
+sso_role_name = AdministratorAccess
+region = il-central-1
+
+[profile prod]
+sso_session = Escapement
+sso_account_id = 312605937492
+sso_role_name = AdministratorAccess
+region = il-central-1

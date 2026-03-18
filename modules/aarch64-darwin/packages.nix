@@ -4,10 +4,10 @@
   ...
 }: {
   home.packages = with pkgs; [
-    colima
+    unstable.colima
     coreutils-prefixed
     unstable.docker-client
-    lima
+    unstable.lima
     pngpaste
     pinentry_mac
   ];

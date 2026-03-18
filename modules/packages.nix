@@ -15,7 +15,7 @@ in {
     _1password-cli
     act
     actionlint
-    unstable.aider-chat
+    aider-chat
     alejandra
     unstable.amp-cli
     aria2
@@ -154,7 +154,7 @@ in {
     process-compose
     # prometheus ## conflicts with go-migrate
     protobuf
-    # pulumi-bin
+    pulumi-bin
     (python3.withPackages (ps:
       with ps; [
         black
@@ -177,7 +177,7 @@ in {
         pytest
         python-dotenv
         torch-bin
-        torchaudio-bin
+        # torchaudio-bin
         torchvision-bin
         tqdm
       ]))

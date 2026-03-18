@@ -93,6 +93,6 @@
   '';
 
   home.activation.clearZshCompletionCache = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        run rm -f ~/.zcompdump*
+    run rm -f ~/.zcompdump*
   '';
 }
